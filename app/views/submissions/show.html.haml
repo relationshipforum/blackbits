@@ -8,3 +8,11 @@
           = time_ago_in_words post.created_at
           ago
           = "(#{l post.created_at})"
+      .panel-body
+        = markdown post
+
+  .message-details-reply
+    = form_for [@submission, @submission.posts.new], { html: { id: "message-details-reply" } } do |f|
+      = f.text_area :body, class: "form-control", rows: 5
+      .expanding-input-hidden{:style => "margin-top: 10px;"}
+        %button.btn.btn-primary.pull-right Send Message

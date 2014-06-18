@@ -9,6 +9,7 @@ gem "rspec-rails"
 gem "paperclip"
 gem "friendly_id", "~> 5.0.0"
 gem "carmen-rails"
+gem "redcarpet"
 
 gem "sass-rails", "~> 4.0.3"
 gem "uglifier", ">= 1.3.0"

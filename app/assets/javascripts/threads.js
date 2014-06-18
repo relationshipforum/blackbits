@@ -19,5 +19,16 @@
                 }
             }
         });
+
+        $("#message-details-reply").expandingInput({
+			target: "textarea",
+			hidden_content: "> div",
+			placeholder: 'Click here to <a htef="#" class="text-muted"><strong>Reply</strong></a>',
+			onAfterExpand: function () {
+				$("#message-details-reply textarea").attr("placeholder", "").markdown({
+					iconlibrary: "fa"
+				});
+			}
+		});
     });
 }());
