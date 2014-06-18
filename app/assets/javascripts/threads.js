@@ -31,7 +31,7 @@
 			}
 		});
 
-        $(document).on("click", "#thank-post", function () {
+        $(document).on("click", ".thank-post", function () {
             var panel = $(this).closest(".panel").first(),
                 postId = panel.data("post-id");
 
@@ -51,7 +51,7 @@
             $("#message-details-reply textarea").val("");
         });
 
-        $(document).on("click", "#delete-post", function () {
+        $(document).on("click", ".delete-post", function () {
             var panel = $(this).closest(".panel"),
                 postId = panel.data("post-id");
 

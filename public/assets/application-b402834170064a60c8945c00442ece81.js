@@ -10797,7 +10797,7 @@ for(d=[],m=a=b=this.ymin,c=this.ymax;k>0?c>=a:a>=c;m=a+=k)d.push(m);return d}.ca
 			}
 		});
 
-        $(document).on("click", "#thank-post", function () {
+        $(document).on("click", ".thank-post", function () {
             var panel = $(this).closest(".panel").first(),
                 postId = panel.data("post-id");
 
@@ -10817,7 +10817,7 @@ for(d=[],m=a=b=this.ymin,c=this.ymax;k>0?c>=a:a>=c;m=a+=k)d.push(m);return d}.ca
             $("#message-details-reply textarea").val("");
         });
 
-        $(document).on("click", "#delete-post", function () {
+        $(document).on("click", ".delete-post", function () {
             var panel = $(this).closest(".panel"),
                 postId = panel.data("post-id");
 

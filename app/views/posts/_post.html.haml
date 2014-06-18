@@ -13,11 +13,11 @@
           %a.btn.btn-xs.btn-info.btn-outline{href: edit_post_path(post)}
             %span.fa.fa-pencil
             Edit Post
-          %button.btn.btn-xs.btn-danger.btn-outline#delete-post
+          %button.btn.btn-xs.btn-danger.btn-outline.delete-post
             %span.fa.fa-trash-o
             Delete Post
         - else
-          %button.btn.btn-xs.btn-info.btn-outline#thank-post{style: "background:#5bc0de;color:#fff"}
+          %button.btn.btn-xs.btn-info.btn-outline.thank-post{style: "background:#5bc0de;color:#fff"}
             - if Thank.where(user_id: current_user.id, post_id: post.id).exists?
               %span.fa.fa-thumbs-down
               Unthank Post
