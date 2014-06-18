@@ -17,4 +17,7 @@
             = link_to submission.posts.last.author, submission.posts.last.author
           %td= link_to submission.forum, submission.forum
           %td= submission.posts.count - 1
-          %td= link_to submission.posts.last.author, submission.posts.last.author
+          %td
+            = link_to submission.posts.last.author, submission.posts.last.author
+            %br
+            = l submission.posts.last.created_at
