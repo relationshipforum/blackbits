@@ -22,42 +22,44 @@
           .navbar-inner
             .navbar-header
               %a.navbar-brand{href: root_path}
-                %img{alt: "Point Gaming", src: asset_path("logo-small.png")}
+                %img{alt: "LF", src: asset_path("logo.png")}
               %button.navbar-toggle.collapsed{"data-target" => "#main-navbar-collapse", "data-toggle" => "collapse", :type => "button"}
                 %i.navbar-icon.fa.fa-bars
             #main-navbar-collapse.collapse.navbar-collapse.main-navbar-collapse
               %div
                 %ul.nav.navbar-nav
                   %li
-                    %a{href: streams_path} Streams
-                  %li
-                    %a{href: "#"} Store
+                    %a{href: root_path} What's New?
                 .right.clearfix
                   %ul.nav.navbar-nav.pull-right.right-navbar-nav
-                    %li
-                      %form.navbar-form.pull-left
-                        %input.form-control{:placeholder => "Search", :type => "text"}/
-                    %li.dropdown
-                      %a.dropdown-toggle.user-menu{"data-toggle" => "dropdown", :href => "#"}
-                        = image_tag current_user.avatar
-                        %span#user{data: { id: current_user.id }}
-                          = current_user
-                        %span#user-points.badge.badge-primary
-                          = current_user.points
-                      %ul.dropdown-menu
-                        %li
-                          %a{:href => "#"}
-                            %i.dropdown-icon.fa.fa-user
-                            \&nbsp;&nbsp;Profile
-                        %li
-                          %a{:href => "#"}
-                            %i.dropdown-icon.fa.fa-cog
-                            \&nbsp;&nbsp;Settings
-                        %li.divider
-                        %li
-                          %a{href: destroy_user_session_path}
-                            %i.dropdown-icon.fa.fa-power-off
+                    - if user_signed_in?
+                      %li
+                        %form.navbar-form.pull-left
+                          %input.form-control{:placeholder => "Search", :type => "text"}/
+                      %li.dropdown
+                        %a.dropdown-toggle.user-menu{"data-toggle" => "dropdown", :href => "#"}
+                          = image_tag current_user.avatar
+                          %span#user{data: { id: current_user.id }}
+                            = current_user
+                          %span#user-points.badge.badge-primary
+                            = current_user.points
+                        %ul.dropdown-menu
+                          %li
+                            %a{:href => "#"}
+                              %i.dropdown-icon.fa.fa-user
+                              \&nbsp;&nbsp;Profile
+                          %li
+                            %a{:href => "#"}
+                              %i.dropdown-icon.fa.fa-cog
+                              \&nbsp;&nbsp;Settings
+                          %li.divider
+                          %li
+                            %a{href: destroy_user_session_path}
+                              %i.dropdown-icon.fa.fa-power-off
                             \&nbsp;&nbsp;Log Out
+                    - else
+                      %li
+                        = link_to "Sign Up", new_user_registration_path
         #content-wrapper
           .row
             - flash.each do |type, msg|
