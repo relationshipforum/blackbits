@@ -10810,6 +10810,26 @@ for(d=[],m=a=b=this.ymin,c=this.ymax;k>0?c>=a:a>=c;m=a+=k)d.push(m);return d}.ca
                 }
             });
         });
+
+        $(document).on("ajax:success", "form#message-details-reply", function (e, response) {
+            $(".posts-wrapper").append(response);
+            $(window).scrollTop($(document).height());
+            $("#message-details-reply textarea").val("");
+        });
+
+        $(document).on("click", "#delete-post", function () {
+            var panel = $(this).closest(".panel"),
+                postId = panel.data("post-id");
+
+            $.ajax({
+                url: "/posts/" + postId,
+                method: "DELETE",
+
+                success: function () {
+                    panel.remove();
+                }
+            });
+        });
     });
 }());
 
