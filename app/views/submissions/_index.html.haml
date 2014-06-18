@@ -14,7 +14,7 @@
             = link_to submission, submission
             %br
             Started by
-            = link_to submission.posts.last.author, submission.posts.last.author
+            = link_to submission.posts.first.author, submission.posts.first.author
           %td= link_to submission.forum, submission.forum
           %td= submission.posts.count - 1
           %td
