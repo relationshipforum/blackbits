@@ -1,0 +1,24 @@
+#new-thread-modal.modal.fade{role: "dialog"}
+  = form_for Submission.new, html: { id: "new-thread-form", class: "form-horizontal" } do |f|
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+          %h4.modal-title New Thread
+        .modal-body
+          .row.form-group
+            = f.label :forum_id, class: "col-sm-2 control-label"
+            .col-sm-10
+              = f.select :forum_id, options_from_collection_for_select(Forum.all, :id, :title, Forum.default_forum_id), {}, { class: "form-control" }
+          .row.form-group
+            = f.label :title, class: "col-sm-2 control-label"
+            .col-sm-10
+              = f.text_field :title, class: "form-control"
+          = fields_for Post.new do |post_field|
+            .row.form-group
+              = post_field.label :body, class: "col-sm-2 control-label"
+              .col-sm-10
+                = post_field.text_area :body, class: "form-control markdown", rows: 5
+        .modal-footer
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Cancel
+          %button.btn.btn-primary{type: "submit"} Create Thread

@@ -12,9 +12,11 @@
     = f.text_field :username, placeholder: "Username", class: "form-control input-lg", autofocus: true
   .form-group
     = f.text_field :email, placeholder: "Email", class: "form-control input-lg"
+    %p.help-block
+      Please use a valid email. This is only used for account recovery purposes. We will never email you. Promise!
   .form-group
     = f.password_field :password, placeholder: "Password", class: "form-control input-lg"
   .form-group
-    = f.password_field :password_confirmation, placeholder: "Password", class: "form-control input-lg"
+    = f.password_field :password_confirmation, placeholder: "Confirm Password", class: "form-control input-lg"
   .form-actions
     %input.btn.btn-primary.btn-block.btn-lg{:type => "submit", :value => "Sign In"}

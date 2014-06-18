@@ -4,4 +4,5 @@
 //= require bootstrap.min
 //= require turbolinks
 //= require pixel-admin.min
+//= require threads
 

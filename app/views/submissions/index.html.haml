@@ -1,0 +1,36 @@
+.page-header
+  %h1 What's New
+
+.col-md-10.col-md-offset-1
+  .row
+    .pull-right
+      - if user_signed_in?
+        %button.btn.btn-flat.btn-labeled.btn-primary{data: { toggle: "modal", target: "#new-thread-modal" }}
+          %span.btn-label.icon.fa.fa-plus
+          New Thread
+      - else
+        %a.btn.btn-flat.btn-labeled.btn-primary{href: new_user_registration_path}
+          %span.btn-label.icon.fa.fa-plus
+          New Thread
+
+  .row
+    %table{class: "table table-striped"}
+      %thead
+        %tr
+          %th Title
+          %th Replies
+          %th Last Post BY
+
+      %tbody
+        - Submission.order("updated_at DESC").each do |submission|
+          %tr
+            %td
+              = link_to submission, submission
+              %br
+              Started by
+              = submission.author
+            %td= submission.posts.count - 1
+            %td= submission.posts.last.try(:author)
+
+- if user_signed_in?
+  = render partial: "submissions/new"

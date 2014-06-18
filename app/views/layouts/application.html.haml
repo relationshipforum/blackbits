@@ -7,7 +7,7 @@
   %head
     %meta{charset: "utf-8"}
     %meta{content: "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible"}
-    %title Point Gaming
+    %title Love Forum - Online Relationship Discussion
     %meta{content: "width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0", name: "viewport"}
     %link{href: "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin", rel: "stylesheet", type: "text/css"}
     = stylesheet_link_tag :application
@@ -18,18 +18,18 @@
       = yield
     - else
       #main-wrapper
-        #main-navbar.navbar.navbar-inverse{:role => "navigation"}
+        #main-navbar.navbar.navbar-inverse{role: "navigation"}
           .navbar-inner
             .navbar-header
               %a.navbar-brand{href: root_path}
-                %img{alt: "LF", src: asset_path("logo-small.png")}
+                %img{alt: "Love Forum", src: asset_path("logo-small.png")}
               %button.navbar-toggle.collapsed{"data-target" => "#main-navbar-collapse", "data-toggle" => "collapse", :type => "button"}
                 %i.navbar-icon.fa.fa-bars
             #main-navbar-collapse.collapse.navbar-collapse.main-navbar-collapse
               %div
                 %ul.nav.navbar-nav
                   %li
-                    %a{href: root_path} What's New?
+                    %a{href: forums_path} Forums
                 .right.clearfix
                   %ul.nav.navbar-nav.pull-right.right-navbar-nav
                     - if user_signed_in?
@@ -41,8 +41,6 @@
                           = image_tag current_user.avatar
                           %span#user{data: { id: current_user.id }}
                             = current_user
-                          %span#user-points.badge.badge-primary
-                            = current_user.points
                         %ul.dropdown-menu
                           %li
                             %a{:href => "#"}

@@ -1,7 +1,6 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+Forum.create(title: "Announcements", description: "Forum announcements.")
+Forum.create(title: "Love Advice", description: "General Relationship discussion. Post your problems and let other members help you out.")
+Forum.create(title: "Ask A Male", description: "Wonder what your guy friend is thinking? Find help from our male members.")
+Forum.create(title: "Ask A Female", description: "Wonder what your girl friend is thinking? Find help from our female members.")
+Forum.create(title: "Intimate Forum", description: "Discussion related to close body contact & related issues.")
+Forum.create(title: "Off-Topic Discussion", description: "Forum for general conversation and anything not related to the other forums.")
