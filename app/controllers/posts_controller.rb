@@ -3,6 +3,9 @@ class PostsController < ApplicationController
   before_action :set_post, except: [:create, :thanks]
   before_action :authenticate_user!, except: [:index]
 
+  def edit
+  end
+
   def create
     @post = @submission.posts.new(post_params)
     @post.author = current_user
@@ -12,6 +15,9 @@ class PostsController < ApplicationController
   end
 
   def update
+    @post.update_attributes(post_params)
+
+    redirect_to submission_path(@post.submission, anchor: "post-#{@post.id}")
   end
 
   def destroy

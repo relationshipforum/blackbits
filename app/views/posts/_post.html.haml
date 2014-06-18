@@ -1,5 +1,5 @@
 - author = post.author
-.panel{data: { post_id: post.id }}
+.panel{data: { post_id: post.id }, id: "post-#{post.id}"}
   .panel-heading
     %span.panel-title
       %i.panel-title-icon.fa.fa-heart
@@ -10,7 +10,7 @@
     - if user_signed_in?
       .panel-heading-controls
         - if current_user == author
-          %button.btn.btn-xs.btn-info.btn-outline#edit-post
+          %a.btn.btn-xs.btn-info.btn-outline{href: edit_post_path(post)}
             %span.fa.fa-pencil
             Edit Post
           %button.btn.btn-xs.btn-danger.btn-outline#delete-post
@@ -42,9 +42,20 @@
             = l author.created_at
             %br
             = author.posts.count
+
+
     %hr
     .post-content
       = markdown post
+
+      - if post.created_at != post.updated_at
+        %br
+        %br
+        %i
+          Edited at
+          = l post.updated_at
+
+
   - if post.thanks.present?
     .panel-footer
       Thanked by:
