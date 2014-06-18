@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    $(document).on("ready page:load", function () {
+    $(document).on("ready", function () {
         $(".markdown").markdown({
             iconlibrary: "fa"
         });
