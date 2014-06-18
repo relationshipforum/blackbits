@@ -30,5 +30,19 @@
 				});
 			}
 		});
+
+        $(document).on("click", "#thank-post", function () {
+            var panel = $(this).closest(".panel").first(),
+                postId = panel.data("post-id");
+
+            $.ajax({
+                url: "/posts/" + postId + "/thanks",
+                method: "POST",
+
+                success: function (data) {
+                    panel.replaceWith(data);
+                }
+            });
+        });
     });
 }());

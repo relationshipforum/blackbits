@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_submission
+  before_action :set_submission, except: :thanks
 
   def create
     @post = @submission.posts.new(post_params)
@@ -7,6 +7,21 @@ class PostsController < ApplicationController
     @post.save
 
     redirect_to @submission
+  end
+
+  def update
+    
+  end
+
+  def destroy
+    
+  end
+
+  def thanks
+    @post = Post.find(params[:id])
+    @post.thanks!(current_user)
+
+    render @post
   end
 
   private

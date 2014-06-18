@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   friendly_id :username, use: :slugged
 
   has_many :submissions, foreign_key: "author_id"
+  has_many :posts, foreign_key: "author_id"
+  has_many :thanks
 
   has_attached_file :avatar, default_url: "/assets/pixel-admin/avatar.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage/

@@ -1,0 +1,11 @@
+.post-header img.avatar {
+  height: 40px;
+  width: 40px;
+  border-radius: 999999px;
+  float: left;
+  margin-right: 10px;
+}
+
+.post-header .pull-right {
+  text-align: right;
+}

@@ -1,0 +1,40 @@
+- author = post.author
+.panel{data: { post_id: post.id }}
+  .panel-heading
+    %span.panel-title
+      %i.panel-title-icon.fa.fa-heart
+      = time_ago_in_words post.created_at
+      ago
+      = "(#{l post.created_at})"
+
+    .panel-heading-controls
+      %button.btn.btn-xs.btn-info.btn-outline#thank-post
+        - if Thank.where(user_id: current_user.id, post_id: post.id).exists?
+          %span.fa.fa-thumbs-down>
+          \&nbsp;&nbsp;Unthank Post
+        - else
+          %span.fa.fa-thumbs-up>
+          \&nbsp;&nbsp;Thanks!
+  .panel-body
+    .row
+      .post-header
+        .pull-left.col-sm-6
+          = image_tag author.avatar, class: "avatar"
+          %strong= link_to author, author
+          %br
+          %strong= "Regular User"
+        .pull-right.col-sm-3
+          .pull-left
+            Join Date:
+            %br
+            Posts:
+          .pull-right
+            = l author.created_at
+            %br
+            = author.posts.count
+    %hr
+    = markdown post
+  - if post.thanks.present?
+    .panel-footer
+      Thanked by:
+      = post.thanks.map(&:user).map { |u| link_to u, u }.join(", ").html_safe
