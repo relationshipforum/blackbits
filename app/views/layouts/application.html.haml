@@ -1,0 +1,66 @@
+!!!
+/[if IE 8] <html class="ie8">
+/[if IE 9] <html class="ie9 gt-ie8">
+/ [if gt IE 9]><!
+%html.gt-ie8.gt-ie9.not-ie
+  / <![endif]
+  %head
+    %meta{charset: "utf-8"}
+    %meta{content: "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible"}
+    %title Point Gaming
+    %meta{content: "width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0", name: "viewport"}
+    %link{href: "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin", rel: "stylesheet", type: "text/css"}
+    = stylesheet_link_tag :application
+    = javascript_include_tag :application
+
+  %body{class: "theme-default no-main-menu #{yield(:body_class)}"}
+    - if devise_controller?
+      = yield
+    - else
+      #main-wrapper
+        #main-navbar.navbar.navbar-inverse{:role => "navigation"}
+          .navbar-inner
+            .navbar-header
+              %a.navbar-brand{href: root_path}
+                %img{alt: "Point Gaming", src: asset_path("logo-small.png")}
+              %button.navbar-toggle.collapsed{"data-target" => "#main-navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+                %i.navbar-icon.fa.fa-bars
+            #main-navbar-collapse.collapse.navbar-collapse.main-navbar-collapse
+              %div
+                %ul.nav.navbar-nav
+                  %li
+                    %a{href: streams_path} Streams
+                  %li
+                    %a{href: "#"} Store
+                .right.clearfix
+                  %ul.nav.navbar-nav.pull-right.right-navbar-nav
+                    %li
+                      %form.navbar-form.pull-left
+                        %input.form-control{:placeholder => "Search", :type => "text"}/
+                    %li.dropdown
+                      %a.dropdown-toggle.user-menu{"data-toggle" => "dropdown", :href => "#"}
+                        = image_tag current_user.avatar
+                        %span#user{data: { id: current_user.id }}
+                          = current_user
+                        %span#user-points.badge.badge-primary
+                          = current_user.points
+                      %ul.dropdown-menu
+                        %li
+                          %a{:href => "#"}
+                            %i.dropdown-icon.fa.fa-user
+                            \&nbsp;&nbsp;Profile
+                        %li
+                          %a{:href => "#"}
+                            %i.dropdown-icon.fa.fa-cog
+                            \&nbsp;&nbsp;Settings
+                        %li.divider
+                        %li
+                          %a{href: destroy_user_session_path}
+                            %i.dropdown-icon.fa.fa-power-off
+                            \&nbsp;&nbsp;Log Out
+        #content-wrapper
+          .row
+            - flash.each do |type, msg|
+              .col-sm-12
+                = content_tag :div, msg, class: "alert alert-#{type == "notice" ? "success" : "danger"}"
+          = content_for?(:content) ? yield(:content) : yield
