@@ -7,7 +7,7 @@
     - if user_signed_in?
       = form_for [@submission, @submission.posts.new], { remote: true, html: { id: "message-details-reply" } } do |f|
         = f.text_area :body, class: "form-control", rows: 5
-        .expanding-input-hidden{:style => "margin-top: 10px;"}
+        .expanding-input-hidden{style: "margin-top: 10px;"}
           %button.btn.btn-primary.pull-right Send Message
     - else
       %p Sign in to reply!

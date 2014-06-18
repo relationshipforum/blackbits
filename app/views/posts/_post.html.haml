@@ -7,15 +7,23 @@
       ago
       = "(#{l post.created_at})"
 
-    - if user_signed_in? && post.author != current_user
+    - if user_signed_in?
       .panel-heading-controls
-        %button.btn.btn-xs.btn-info.btn-outline#thank-post
-          - if Thank.where(user_id: current_user.id, post_id: post.id).exists?
-            %span.fa.fa-thumbs-down>
-            \&nbsp;&nbsp;Unthank Post
-          - else
-            %span.fa.fa-thumbs-up>
-            \&nbsp;&nbsp;Thanks!
+        - if current_user == author
+          %button.btn.btn-xs.btn-info.btn-outline#edit-post
+            %span.fa.fa-pencil
+            Edit Post
+          %button.btn.btn-xs.btn-danger.btn-outline#delete-post
+            %span.fa.fa-trash-o
+            Delete Post
+        - else
+          %button.btn.btn-xs.btn-info.btn-outline#thank-post
+            - if Thank.where(user_id: current_user.id, post_id: post.id).exists?
+              %span.fa.fa-thumbs-down
+              Unthank Post
+            - else
+              %span.fa.fa-thumbs-up
+              Thanks!
   .panel-body
     .row
       .post-header
@@ -35,7 +43,8 @@
             %br
             = author.posts.count
     %hr
-    = markdown post
+    .post-content
+      = markdown post
   - if post.thanks.present?
     .panel-footer
       Thanked by:

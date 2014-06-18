@@ -50,5 +50,19 @@
             $(window).scrollTop($(document).height());
             $("#message-details-reply textarea").val("");
         });
+
+        $(document).on("click", "#delete-post", function () {
+            var panel = $(this).closest(".panel"),
+                postId = panel.data("post-id");
+
+            $.ajax({
+                url: "/posts/" + postId,
+                method: "DELETE",
+
+                success: function () {
+                    panel.remove();
+                }
+            });
+        });
     });
 }());
