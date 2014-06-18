@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :avatar, content_type: /\Aimage/
   validates_attachment_file_name :avatar, matches: [/png\Z/, /jpe?g\Z/]
 
+  def friendly_gender
+    gender == false ? "female" : "male"
+  end
+
   def to_s
     username
   end
