@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :posts, foreign_key: "author_id"
   has_many :thanks
 
-  has_attached_file :avatar, default_url: "/assets/pixel-admin/avatar.png"
+  has_attached_file :avatar, default_url: "pixel-admin/avatar.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage/
   validates_attachment_file_name :avatar, matches: [/png\Z/, /jpe?g\Z/]
 
