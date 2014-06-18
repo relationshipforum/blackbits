@@ -7,14 +7,15 @@
       ago
       = "(#{l post.created_at})"
 
-    .panel-heading-controls
-      %button.btn.btn-xs.btn-info.btn-outline#thank-post
-        - if Thank.where(user_id: current_user.id, post_id: post.id).exists?
-          %span.fa.fa-thumbs-down>
-          \&nbsp;&nbsp;Unthank Post
-        - else
-          %span.fa.fa-thumbs-up>
-          \&nbsp;&nbsp;Thanks!
+    - unless post.author == current_user
+      .panel-heading-controls
+        %button.btn.btn-xs.btn-info.btn-outline#thank-post
+          - if Thank.where(user_id: current_user.id, post_id: post.id).exists?
+            %span.fa.fa-thumbs-down>
+            \&nbsp;&nbsp;Unthank Post
+          - else
+            %span.fa.fa-thumbs-up>
+            \&nbsp;&nbsp;Thanks!
   .panel-body
     .row
       .post-header

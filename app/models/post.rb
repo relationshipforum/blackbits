@@ -8,6 +8,8 @@ class Post < ActiveRecord::Base
   validates :submission_id, presence: true
 
   def thanks!(user)
+    return if user == author
+
     thanks = Thank.where(post_id: id, user_id: user.id).first
 
     if thanks
