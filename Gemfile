@@ -23,3 +23,7 @@ group :development do
   gem "spring"
   gem "byebug"
 end
+
+group :production do
+  gem "rails_12factor"
+end
