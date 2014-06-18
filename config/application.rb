@@ -24,5 +24,7 @@ module Blackbits
     config.assets.precompile += %w( .svg .eot .woff .ttf)
     config.generators.javascripts = false
     config.generators.stylesheets = false
+
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| html_tag }
   end
 end

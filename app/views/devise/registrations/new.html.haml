@@ -18,5 +18,19 @@
     = f.password_field :password, placeholder: "Password", class: "form-control input-lg"
   .form-group
     = f.password_field :password_confirmation, placeholder: "Confirm Password", class: "form-control input-lg"
+  %hr
+  .form-group
+    = f.country_select :country, { priority: %w(US CA EU), prompt: "Select a Country" }, { class: "form-control" }
+  .form-group
+    = f.time_zone_select :time_zone, nil, {}, class: "form-control"
+  .form-group
+    .radio
+      %label
+        = f.radio_button :gender, true, class: "px"
+        %span{class: "lbl"} Male
+    .radio
+      %label
+        = f.radio_button :gender, false, class: "px"
+        %span{class: "lbl"} Female
   .form-actions
     %input.btn.btn-primary.btn-block.btn-lg{:type => "submit", :value => "Sign In"}

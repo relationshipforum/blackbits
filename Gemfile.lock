@@ -33,6 +33,11 @@ GEM
     byebug (3.1.2)
       columnize (~> 0.8)
       debugger-linecache (~> 1.2)
+    carmen (1.0.0)
+      unicode_utils (~> 1.4.0)
+    carmen-rails (1.0.1)
+      carmen (~> 1.0.0)
+      rails
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.4)
@@ -154,6 +159,7 @@ GEM
     uglifier (2.5.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unicode_utils (1.4.0)
     warden (1.2.3)
       rack (>= 1.0)
 
@@ -162,6 +168,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  carmen-rails
   coffee-rails (~> 4.0.0)
   devise
   friendly_id (~> 5.0.0)

@@ -18,6 +18,7 @@
       %thead
         %tr
           %th Title
+          %th Forum
           %th Replies
           %th Last Post BY
 
@@ -28,9 +29,10 @@
               = link_to submission, submission
               %br
               Started by
-              = submission.author
+              = link_to submission.posts.last.author, submission.posts.last.author
+            %td= link_to submission.forum, submission.forum
             %td= submission.posts.count - 1
-            %td= submission.posts.last.try(:author)
+            %td= link_to submission.posts.last.author, submission.posts.last.author
 
 - if user_signed_in?
   = render partial: "submissions/new"

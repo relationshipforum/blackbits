@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
          :confirmable
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }
+  validates :gender, inclusion: { in: [false, true] }
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
