@@ -38,10 +38,15 @@
             Join Date:
             %br
             Posts:
+            %br
+            Thanked:
           .pull-right
             = l author.created_at
             %br
             = author.posts.count
+            %br
+            = Thank.thank_stats_for(author)
+            times
 
 
     %hr
