@@ -1,12 +1,13 @@
 class PostsController < ApplicationController
   before_action :set_submission, except: :thanks
+  before_action :authenticate_user!, except: [:index]
 
   def create
     @post = @submission.posts.new(post_params)
     @post.author = current_user
     @post.save
 
-    redirect_to @submission
+    render @post
   end
 
   def update

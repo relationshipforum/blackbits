@@ -44,5 +44,11 @@
                 }
             });
         });
+
+        $(document).on("ajax:success", "form#message-details-reply", function (e, response) {
+            $(".posts-wrapper").append(response);
+            $(window).scrollTop($(document).height());
+            $("#message-details-reply textarea").val("");
+        });
     });
 }());
