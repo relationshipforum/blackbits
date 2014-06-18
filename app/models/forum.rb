@@ -2,7 +2,12 @@ class Forum < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: :slugged
 
-  has_many :submissions
+  belongs_to :category
+  has_many :submissions, dependent: :destroy
+  has_many :posts, through: :submissions
+
+  validates :title, presence: true
+  validates :category_id, presence: true
 
   def to_s
     title

@@ -1,0 +1,20 @@
+.row
+  %table{class: "table table-striped"}
+    %thead
+      %tr
+        %th Title
+        %th Forum
+        %th Replies
+        %th Last Post By
+
+    %tbody
+      - submissions.each do |submission|
+        %tr
+          %td
+            = link_to submission, submission
+            %br
+            Started by
+            = link_to submission.posts.last.author, submission.posts.last.author
+          %td= link_to submission.forum, submission.forum
+          %td= submission.posts.count - 1
+          %td= link_to submission.posts.last.author, submission.posts.last.author

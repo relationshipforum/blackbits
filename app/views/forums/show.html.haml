@@ -1,5 +1,5 @@
 .page-header
-  %h1 What's New
+  %h1= @forum
 
 .col-md-10.col-md-offset-1
   .row
@@ -13,7 +13,7 @@
           %span.btn-label.icon.fa.fa-plus
           New Thread
 
-  = render partial: "submissions/index", locals: { submissions: Submission.order("updated_at DESC") }
+  = render partial: "submissions/index", locals: { submissions: @forum.submissions.order("updated_at DESC") }
 
 - if user_signed_in?
   = render partial: "submissions/new"

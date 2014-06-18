@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
   belongs_to :author, class_name: "User"
   belongs_to :submission, inverse_of: :posts
-  has_many :thanks
+  has_many :thanks, dependent: :destroy
 
   validates :body, presence: true
   validates :author_id, presence: true

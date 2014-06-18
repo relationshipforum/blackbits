@@ -9,7 +9,7 @@
           .row.form-group
             = f.label :forum_id, class: "col-sm-2 control-label"
             .col-sm-10
-              = f.select :forum_id, options_from_collection_for_select(Forum.all, :id, :title, Forum.default_forum_id), {}, { class: "form-control" }
+              = f.select :forum_id, options_from_collection_for_select(Forum.all, :id, :title, @forum.try(:id) || Forum.default_forum_id), {}, { class: "form-control" }
           .row.form-group
             = f.label :title, class: "col-sm-2 control-label"
             .col-sm-10
@@ -18,7 +18,7 @@
             .row.form-group
               = post_field.label :body, class: "col-sm-2 control-label"
               .col-sm-10
-                = post_field.text_area :body, class: "form-control markdown", rows: 5
+                = post_field.text_area :body, class: "form-control markdown", rows: 15
         .modal-footer
           %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Cancel
           %button.btn.btn-primary{type: "submit"} Create Thread

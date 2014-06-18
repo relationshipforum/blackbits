@@ -1,2 +1,38 @@
 .page-header
   %h1 Forums
+
+.col-md-10.col-md-offset-1
+  .row
+    .pull-right
+      - if user_signed_in?
+        %button.btn.btn-flat.btn-labeled.btn-primary{data: { toggle: "modal", target: "#new-thread-modal" }}
+          %span.btn-label.icon.fa.fa-plus
+          New Thread
+      - else
+        %a.btn.btn-flat.btn-labeled.btn-primary{href: new_user_registration_path}
+          %span.btn-label.icon.fa.fa-plus
+          New Thread
+
+  .row
+    - Category.all.each do |category|
+      %h3= category
+
+      %table{class: "table table-striped"}
+        %thead
+          %tr
+            %th Forum
+            %th Threads
+            %th Posts
+
+        %tbody
+          - category.forums.each do |forum|
+            %tr
+              %td
+                %strong= link_to forum, forum
+                %br
+                = forum.description
+              %td= forum.submissions.count
+              %td= forum.posts.count
+
+- if user_signed_in?
+  = render partial: "submissions/new"
