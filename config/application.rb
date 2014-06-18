@@ -26,6 +26,5 @@ module Blackbits
     config.generators.stylesheets = false
 
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| html_tag }
-    config.serve_static_assets = true
   end
 end
