@@ -41,7 +41,7 @@ class Submission < ActiveRecord::Base
   def viewed_by?(user)
     return false unless user
 
-    view = View.where(user_id: user.id, submission_id: id).first
+    view = View.where(user_id: user.id, submission_id: id).last
     view && view.viewed_at >= updated_at
   end
 end
