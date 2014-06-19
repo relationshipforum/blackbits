@@ -1,4 +1,6 @@
 class Post < ActiveRecord::Base
+  after_create :update_submission
+
   belongs_to :author, class_name: "User"
   belongs_to :submission, inverse_of: :posts
   has_many :thanks, dependent: :destroy
@@ -17,5 +19,10 @@ class Post < ActiveRecord::Base
     else
       Thank.create(post_id: id, user_id: user.id)
     end
+  end
+
+  private
+  def update_submission
+    submission.update(updated_at: Time.now)
   end
 end
