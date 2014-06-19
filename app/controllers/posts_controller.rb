@@ -11,6 +11,8 @@ class PostsController < ApplicationController
     @post.author = current_user
     @post.save
 
+    @submission.viewed!(current_user)
+
     render @post
   end
 
