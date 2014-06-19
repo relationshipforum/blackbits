@@ -11,7 +11,11 @@
       - submissions.each do |submission|
         %tr
           %td
-            = link_to submission, submission
+            - if submission.viewed_by?(current_user)
+              = link_to submission, submission
+            - else
+              %strong
+                = link_to submission, submission
             %br
             Started by
             = link_to submission.posts.first.author, submission.posts.first.author

@@ -9,6 +9,7 @@ class SubmissionsController < ApplicationController
   def show
     @page = params[:page].to_i || 1
     @posts = @submission.posts.page(@page)
+    @submission.viewed!(current_user)
   end
 
   def edit
