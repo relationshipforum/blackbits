@@ -4,13 +4,31 @@ class Submission < ActiveRecord::Base
 
   belongs_to :forum
   belongs_to :author, class_name: "User"
-  has_many :posts, dependent: :destroy
+  has_many :posts, -> { order "created_at ASC" }, dependent: :destroy
 
   validates :title, presence: true
   validates :author_id, presence: true
 
   def to_s
     title
+  end
+
+  def first_unread_post(user)
+    return posts.first unless user
+
+    view = View.find_by(user_id: user.id, submission_id: id)
+    post = nil
+
+    if view
+      # First post created AFTER the last view.
+      post = posts.where("created_at > ?", view.viewed_at).first
+    else
+      # If we haven't viewed the thread before, first post.
+      post = posts.first
+    end
+
+    # If nothing matches, send them to the last post.
+    post || posts.last
   end
 
   def viewed!(user)

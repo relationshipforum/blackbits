@@ -1,6 +1,6 @@
 class SubmissionsController < ApplicationController
-  before_action :set_submission, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_submission, only: [:show, :unread, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show, :unread]
 
   def index
     @submissions = Submission.all
@@ -10,6 +10,13 @@ class SubmissionsController < ApplicationController
     @page = params[:page].to_i || 1
     @posts = @submission.posts.page(@page)
     @submission.viewed!(current_user)
+  end
+
+  def unread
+    post = @submission.first_unread_post(current_user)
+    page = (@submission.posts.index(post) / 10) + 1
+
+    redirect_to submission_path(@submission, page: page, anchor: "post-#{post.id}")
   end
 
   def edit

@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   resources :forums
   resources :submissions, path: "threads" do
     resources :posts, only: [:create]
+
+    member do
+      get "unread"
+    end
   end
 
   resources :posts do
