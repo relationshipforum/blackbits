@@ -2,6 +2,7 @@ class Post < ActiveRecord::Base
   paginates_per 10
 
   after_create :update_submission
+  after_destroy :update_submission
 
   belongs_to :author, class_name: "User"
   belongs_to :submission, inverse_of: :posts
@@ -25,6 +26,6 @@ class Post < ActiveRecord::Base
 
   private
   def update_submission
-    submission.update(updated_at: Time.now)
+    submission.update(updated_at: submission.posts.last.created_at)
   end
 end
