@@ -16,8 +16,9 @@ class PostsController < ApplicationController
 
   def update
     @post.update_attributes(post_params)
+    page = (@post.submission.posts.index(@post) / 10) + 1
 
-    redirect_to submission_path(@post.submission, anchor: "post-#{@post.id}")
+    redirect_to submission_path(@post.submission, page: page, anchor: "post-#{@post.id}")
   end
 
   def destroy

@@ -1,6 +1,8 @@
 class Post < ActiveRecord::Base
   paginates_per 10
 
+  default_scope { order("created_at ASC") }
+
   after_create :update_submission
   after_destroy :update_submission
 
