@@ -17,5 +17,6 @@ Rails.application.routes.draw do
   root to: "submissions#index"
 
   devise_for :users, path_names: { sign_in: "login", sign_out: "logout", sign_up: "register" }
+  get "members" => "users#index", as: :members
   get "users/:id" => "users#show", as: :user
 end

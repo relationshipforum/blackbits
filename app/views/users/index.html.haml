@@ -1,0 +1,18 @@
+.page-header
+  %h1 Members
+
+.col-sm-10
+  .col-sm-offset-1
+    %table{class: "table table-striped"}
+      %thead
+        %tr
+          %th Username
+          %th Joined On
+          %th Posts
+
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td= link_to user, user
+            %td= l user.created_at
+            %td= user.posts.count
