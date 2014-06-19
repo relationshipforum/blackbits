@@ -16,7 +16,8 @@ class Submission < ActiveRecord::Base
   def viewed!(user)
     return false unless user
 
-    View.create(user_id: user.id, submission_id: id)
+    view = View.find_or_create_by(user_id: user.id, submission_id: id)
+    view.update(viewed_at: Time.now)
   end
 
   def viewed_by?(user)
