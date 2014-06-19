@@ -1,7 +1,18 @@
 .col-sm-10.col-sm-offset-1
   .posts-wrapper
-    - @submission.posts.order("created_at ASC").each do |post|
+    .row
+      .pull-right{style: "margin-right: 12px"}
+        %p
+          = paginate @posts
+
+    - @posts.each do |post|
       = render post
+
+    .row
+      .pull-right{style: "margin-right: 12px"}
+        = paginate @posts
+        %br
+        %br
 
   .message-details-reply
     - if user_signed_in?

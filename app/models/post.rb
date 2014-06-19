@@ -1,4 +1,6 @@
 class Post < ActiveRecord::Base
+  paginates_per 10
+
   after_create :update_submission
 
   belongs_to :author, class_name: "User"

@@ -7,6 +7,8 @@ class SubmissionsController < ApplicationController
   end
 
   def show
+    @page = params[:page].to_i || 1
+    @posts = @submission.posts.order("created_at ASC").page(@page)
   end
 
   def edit
