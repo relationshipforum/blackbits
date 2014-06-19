@@ -30,6 +30,8 @@
         .pull-left.col-sm-6
           = image_tag author.avatar, class: "avatar"
           %i.panel-title-icon.fa{class: "fa-#{author.friendly_gender}"}
+          - if author.country.present?
+            = country_flag(author.country)
           %strong= link_to author, author
           %br
           %strong= "Regular User"
