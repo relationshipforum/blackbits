@@ -54,7 +54,7 @@
     .post-content
       = markdown post
 
-      - if post.created_at != post.updated_at
+      - if post.updated_at - 2.minutes > post.created_at
         %br
         %br
         %i
