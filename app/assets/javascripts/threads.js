@@ -28,6 +28,8 @@
 				$("#message-details-reply textarea").attr("placeholder", "").markdown({
 					iconlibrary: "fa"
 				});
+
+                $(window).scrollTop($(document).height());
 			}
 		});
 

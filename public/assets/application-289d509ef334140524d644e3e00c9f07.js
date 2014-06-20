@@ -10794,6 +10794,8 @@ for(d=[],m=a=b=this.ymin,c=this.ymax;k>0?c>=a:a>=c;m=a+=k)d.push(m);return d}.ca
 				$("#message-details-reply textarea").attr("placeholder", "").markdown({
 					iconlibrary: "fa"
 				});
+
+                $(window).scrollTop($(document).height());
 			}
 		});
 
