@@ -5,6 +5,7 @@ class Post < ActiveRecord::Base
 
   after_create :update_submission
   after_destroy :update_submission
+  after_save :clear_cache
 
   belongs_to :author, class_name: "User"
   belongs_to :submission, inverse_of: :posts
@@ -34,6 +35,10 @@ class Post < ActiveRecord::Base
     else
       Thank.create(post_id: id, user_id: user.id)
     end
+  end
+
+  def clear_cache
+    Rails.cache.delete_matched("post-#{id}")
   end
 
   private
