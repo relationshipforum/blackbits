@@ -9,3 +9,7 @@
 .post-header .pull-right {
   text-align: right;
 }
+
+.post-body blockquote {
+  font-size: 12px;
+}

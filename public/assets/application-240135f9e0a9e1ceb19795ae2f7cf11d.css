@@ -31,6 +31,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 .post-header .pull-right {
   text-align: right;
 }
+
+.post-body blockquote {
+  font-size: 12px;
+}
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
