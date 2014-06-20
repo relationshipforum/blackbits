@@ -4,4 +4,5 @@
 //= require pixel-admin.min
 //= require threads
 //= require effects
+//= require chat
 

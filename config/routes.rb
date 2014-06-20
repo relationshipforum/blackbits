@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :chats do
+    collection { get "socket" }
+  end
+
   resources :forums
   resources :submissions, path: "threads" do
     resources :posts, only: [:create]

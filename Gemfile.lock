@@ -177,6 +177,9 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
+    tubesock (0.2.3)
+      rack (>= 1.5.0)
+      websocket (>= 1.1.0)
     tzinfo (1.2.1)
       thread_safe (~> 0.1)
     uglifier (2.5.1)
@@ -185,6 +188,7 @@ GEM
     unicode_utils (1.4.0)
     warden (1.2.3)
       rack (>= 1.0)
+    websocket (1.1.4)
 
 PLATFORMS
   ruby
@@ -198,6 +202,7 @@ DEPENDENCIES
   haml-rails
   jbuilder (~> 2.0)
   jquery-rails
+  json
   kaminari
   paperclip
   pg
@@ -209,4 +214,5 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 4.0.3)
   spring
+  tubesock
   uglifier (>= 1.3.0)
