@@ -14,8 +14,6 @@
             - if submission.viewed_by?(current_user)
               = link_to submission, unread_submission_path(submission)
             - else
-              %span
-                %i.fa.fa-star
               %strong
                 = link_to submission, unread_submission_path(submission)
             %br
