@@ -10790,7 +10790,7 @@ for(d=[],m=a=b=this.ymin,c=this.ymax;k>0?c>=a:a>=c;m=a+=k)d.push(m);return d}.ca
             var panel = $(this).closest(".panel").first(),
                 postId = panel.data("post-id"),
                 postBody = $(".post-body[data-post-id=" + postId + "]").html().trim(),
-                text = $(postBody).text().replace(/\n\s+/, "\n> ");
+                text = $(postBody).text().replace(/\n/g, "\n> ").replace(/[^\S\n]+/g, " ");
 
             $("#post_body").val("> " + text + "\n\n");
             $(window).scrollTop($(document).height());

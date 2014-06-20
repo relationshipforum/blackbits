@@ -24,7 +24,7 @@
             var panel = $(this).closest(".panel").first(),
                 postId = panel.data("post-id"),
                 postBody = $(".post-body[data-post-id=" + postId + "]").html().trim(),
-                text = $(postBody).text().replace(/\n\s+/, "\n> ");
+                text = $(postBody).text().replace(/\n/g, "\n> ").replace(/[^\S\n]+/g, " ");
 
             $("#post_body").val("> " + text + "\n\n");
             $(window).scrollTop($(document).height());
