@@ -25,46 +25,48 @@
               %span.fa.fa-thumbs-up
               Thanks!
 
-  - cache("post-#{post.id}") do
-    .panel-body
-      .row
-        .post-header
-          .pull-left.col-sm-6
-            = image_tag author.avatar, class: "avatar"
-            %i.panel-title-icon.fa{class: "fa-#{author.friendly_gender}"}
-            - if author.country.present?
-              = country_flag(author.country)
-            %strong= link_to author, author
+  .panel-body
+    .row
+      .post-header
+        .pull-left.col-sm-6
+          = image_tag author.avatar, class: "avatar"
+          %i.panel-title-icon.fa{class: "fa-#{author.friendly_gender}"}
+          - if author.country.present?
+            = country_flag(author.country)
+          %strong= link_to author, author
+          %br
+          %strong= author.title
+        .pull-right.col-sm-3
+          .pull-left
+            Join Date:
             %br
-            %strong= "Regular User"
-          .pull-right.col-sm-3
-            .pull-left
-              Join Date:
-              %br
-              Posts:
-              %br
-              Thanked:
-            .pull-right
-              = l author.created_at
-              %br
-              = author.posts.count
-              %br
-              = Thank.thank_stats_for(author)
+            Posts:
+            %br
+            Thanked:
+          .pull-right
+            = l author.created_at
+            %br
+            = author.posts.count
+            %br
+            = Thank.thank_stats_for(author)
 
 
-      %hr
-      .post-content
-        = markdown post
+    %hr
+    .post-content
+      = markdown post.body
 
-        - if post.updated_at - 2.minutes > post.created_at
-          %br
-          %br
-          %i
-            Edited at
-            = l post.updated_at
+      - if post.updated_at - 2.minutes > post.created_at
+        %br
+        %br
+        %i
+          Edited at
+          = l post.updated_at
 
+      - if author.signature.present?
+        %hr
+        = markdown author.signature
 
-    - if post.thanks.present?
-      .panel-footer
-        Thanked by:
-        = post.thanks.map(&:user).map { |u| link_to u, u }.join(", ").html_safe
+  - if post.thanks.present?
+    .panel-footer
+      Thanked by:
+      = post.thanks.map(&:user).map { |u| link_to u, u }.join(", ").html_safe

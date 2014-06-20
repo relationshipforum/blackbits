@@ -1,0 +1,19 @@
+.page-header
+  %h1 Profile
+
+.col-sm-6
+  = form_for current_user, { html: { class: "form-horizontal" } } do |f|
+    .panel
+      .panel-heading
+        %span.panel-title Edit Profile
+      .panel-body
+        .row.form-group
+          = f.label :title, class: "col-sm-4 control-label"
+          .col-sm-8
+            = f.text_field :title, class: "form-control"
+        .row.form-group
+          = f.label :country, class: "col-sm-4 control-label"
+          .col-sm-8
+            = f.country_select :country, { priority: %w(US CA EU), prompt: "Select a Country" }, { class: "form-control" }
+      .panel-footer.text-right
+        %button.btn.btn-primary Submit

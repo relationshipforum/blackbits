@@ -10,39 +10,25 @@
           .btn-group
             %a.btn.btn-xs.btn-primary.btn-outline.dark{:href => "#"}
               %i.fa.fa-envelope
-            %a.btn.btn-xs.btn-primary.btn-outline.dark{:href => "#"}
-              %i.fa.fa-user
-            %a.btn.btn-xs.btn-primary.btn-outline.dark{:href => "#"}
-              %i.fa.fa-cog
-            %a.btn.btn-xs.btn-danger.btn-outline.dark{:href => "#"}
+            %a.btn.btn-xs.btn-danger.btn-outline.dark{href: destroy_user_session_path}
               %i.fa.fa-power-off
-          %a.close{:href => "#"} &times;
+          %a.close{href: root_path} &times;
       %ul.navigation
-        %li
-          %a{:href => "index.html"}
-            %i.menu-icon.fa.fa-dashboard
-            %span.mm-text Dashboard
-        %li.mm-dropdown
-          %a{:href => "#"}
-            %i.menu-icon.fa.fa-th
-            %span.mm-text Layouts
-            %span.label.label-warning Updated
-          %ul
-            %li
-              %a{:href => "layouts-grid.html", :tabindex => "-1"}
-                %span.mm-text Grid
-            %li
-              %a{:href => "layouts-main-menu.html", :tabindex => "-1"}
-                %i.menu-icon.fa.fa-th-list
-                %span.mm-text Main menu
-                %span.label.label-warning Updated
-        %li
-          %a{:href => "stat-panels.html"}
-            %i.menu-icon.fa.fa-tasks
-            %span.mm-text Stat panels
-        %li
-          %a{:href => "widgets.html"}
-            %i.menu-icon.fa.fa-flask
-            %span.mm-text Widgets
+        %li{class: action_name == "edit" ? "active" : ""}
+          %a{href: profile_path}
+            %i.menu-icon.fa.fa-user
+            %span.mm-text Profile
+        %li{class: action_name == "avatar" ? "active" : ""}
+          %a{href: profile_avatar_path}
+            %i.menu-icon.fa.fa-camera
+            %span.mm-text Avatar
+        %li{class: action_name == "signature" ? "active" : ""}
+          %a{href: profile_signature_path}
+            %i.menu-icon.fa.fa-pencil
+            %span.mm-text Signature
+        %li{class: action_name == "settings" ? "active" : ""}
+          %a{href: profile_settings_path}
+            %i.menu-icon.fa.fa-cog
+            %span.mm-text Settings
 
 = render template: "layouts/application"

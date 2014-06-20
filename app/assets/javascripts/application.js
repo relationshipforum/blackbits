@@ -3,4 +3,5 @@
 //= require bootstrap.min
 //= require pixel-admin.min
 //= require threads
+//= require effects
 

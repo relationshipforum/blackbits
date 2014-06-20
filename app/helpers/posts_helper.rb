@@ -1,6 +1,6 @@
 module PostsHelper
-  def markdown(post)
-    return "" unless post.present?
+  def markdown(data)
+    return "" unless data.present?
 
     @html_renderer  ||= CustomRenderer.new(filter_html: true,
                                            hard_wrap: true,
@@ -16,7 +16,7 @@ module PostsHelper
                                                prettify: true,
                                                highlight: true)
 
-    @renderer.render(post.body).html_safe
+    @renderer.render(data).html_safe
   end
 
   def country_flag(country)

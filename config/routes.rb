@@ -18,7 +18,10 @@ Rails.application.routes.draw do
 
   devise_for :users, path_names: { sign_in: "login", sign_out: "logout", sign_up: "register" }
   get "members" => "users#index", as: :members
-  get "users/:id" => "users#show", as: :user
+  resources :users
 
-  get "profile" => "profile#settings"
+  get "profile" => "profile#edit"
+  get "profile/avatar" => "profile#avatar"
+  get "profile/settings" => "profile#settings"
+  get "profile/signature" => "profile#signature"
 end
