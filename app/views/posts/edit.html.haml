@@ -3,7 +3,7 @@
 
 .col-sm-10.col-sm-offset-1
   = form_for @post do |f|
-    = f.text_area :body, class: "form-control markdown"
+    = f.text_area :body, rows: 15, class: "form-control markdown"
 
     .pull-right
       %button.btn.btn-primary{type: "submit", style: "margin-top: 10px"} Submit Edit
