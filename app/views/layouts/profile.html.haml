@@ -4,8 +4,7 @@
       #menu-content-demo.menu-content.top
         %div
           .text-bg
-            %span.text-slim Welcome,
-            %span.text-semibold John
+            %span.text-semibold= current_user
           = image_tag current_user.avatar
           .btn-group
             %a.btn.btn-xs.btn-primary.btn-outline.dark{:href => "#"}
