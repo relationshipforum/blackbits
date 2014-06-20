@@ -20,18 +20,16 @@
             }
         });
 
-        $("#message-details-reply").expandingInput({
-			target: "textarea",
-			hidden_content: "> div",
-			placeholder: 'Click here to <a htef="#" class="text-muted"><strong>Reply</strong></a>',
-			onAfterExpand: function () {
-				$("#message-details-reply textarea").attr("placeholder", "").markdown({
-					iconlibrary: "fa"
-				});
+        $(document).on("click", ".quote-post", function () {
+            var panel = $(this).closest(".panel").first(),
+                postId = panel.data("post-id"),
+                postBody = $(".post-body[data-post-id=" + postId + "]").html().trim(),
+                text = $(postBody).text().replace(/\n\s+/, "\n> ");
 
-                $(window).scrollTop($(document).height());
-			}
-		});
+            $("#post_body").val("> " + text + "\n\n");
+            $(window).scrollTop($(document).height());
+            $("#message-details-reply textarea").focus();
+        });
 
         $(document).on("click", ".thank-post", function () {
             var panel = $(this).closest(".panel").first(),

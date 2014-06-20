@@ -17,8 +17,8 @@
   .message-details-reply
     - if user_signed_in?
       = form_for [@submission, @submission.posts.new], { remote: true, html: { id: "message-details-reply" } } do |f|
-        = f.text_area :body, class: "form-control", rows: 10
-        .expanding-input-hidden{style: "margin-top: 10px;"}
-          %button.btn.btn-primary.pull-right Send Message
+        = f.text_area :body, class: "form-control markdown", rows: 10
+        .row{style: "margin-top: 10px; margin-right: 5px;"}
+          %button.btn.btn-primary.pull-right Post to Thread
     - else
       %p Sign in to reply!

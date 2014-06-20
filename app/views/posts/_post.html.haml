@@ -17,6 +17,9 @@
             %span.fa.fa-trash-o
             Delete Post
         - else
+          %button.btn.btn-xs.btn-info.btn-outline.quote-post
+            %span.fa.fa-quote-right
+            Quote
           %button.btn.btn-xs.btn-info.btn-outline.thank-post{style: "background:#5bc0de;color:#fff"}
             - if Thank.where(user_id: current_user.id, post_id: post.id).exists?
               %span.fa.fa-thumbs-down
@@ -53,7 +56,8 @@
 
     %hr
     .post-content
-      = markdown post.body
+      .post-body{data: { post_id: post.id }}
+        = markdown post.body
 
       - if post.updated_at - 2.minutes > post.created_at
         %br
