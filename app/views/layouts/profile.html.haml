@@ -1,0 +1,48 @@
+- content_for :menu do
+  #main-menu{:role => "navigation"}
+    #main-menu-inner
+      #menu-content-demo.menu-content.top
+        %div
+          .text-bg
+            %span.text-slim Welcome,
+            %span.text-semibold John
+          = image_tag current_user.avatar
+          .btn-group
+            %a.btn.btn-xs.btn-primary.btn-outline.dark{:href => "#"}
+              %i.fa.fa-envelope
+            %a.btn.btn-xs.btn-primary.btn-outline.dark{:href => "#"}
+              %i.fa.fa-user
+            %a.btn.btn-xs.btn-primary.btn-outline.dark{:href => "#"}
+              %i.fa.fa-cog
+            %a.btn.btn-xs.btn-danger.btn-outline.dark{:href => "#"}
+              %i.fa.fa-power-off
+          %a.close{:href => "#"} &times;
+      %ul.navigation
+        %li
+          %a{:href => "index.html"}
+            %i.menu-icon.fa.fa-dashboard
+            %span.mm-text Dashboard
+        %li.mm-dropdown
+          %a{:href => "#"}
+            %i.menu-icon.fa.fa-th
+            %span.mm-text Layouts
+            %span.label.label-warning Updated
+          %ul
+            %li
+              %a{:href => "layouts-grid.html", :tabindex => "-1"}
+                %span.mm-text Grid
+            %li
+              %a{:href => "layouts-main-menu.html", :tabindex => "-1"}
+                %i.menu-icon.fa.fa-th-list
+                %span.mm-text Main menu
+                %span.label.label-warning Updated
+        %li
+          %a{:href => "stat-panels.html"}
+            %i.menu-icon.fa.fa-tasks
+            %span.mm-text Stat panels
+        %li
+          %a{:href => "widgets.html"}
+            %i.menu-icon.fa.fa-flask
+            %span.mm-text Widgets
+
+= render template: "layouts/application"

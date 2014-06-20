@@ -36,4 +36,6 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.action_mailer.default_url_options = { host: "localhost:4000" }
+
+  config.action_controller.perform_caching = true
 end

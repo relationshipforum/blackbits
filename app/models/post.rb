@@ -38,6 +38,6 @@ class Post < ActiveRecord::Base
 
   private
   def update_submission
-    submission.update(updated_at: submission.posts.last.created_at)
+    submission.update_attributes(updated_at: submission.posts.last.created_at)
   end
 end

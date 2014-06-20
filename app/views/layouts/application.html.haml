@@ -17,7 +17,9 @@
     = stylesheet_link_tag :application
     = javascript_include_tag :application
 
-  %body{class: "theme-default no-main-menu #{yield(:body_class)}"}
+  %body{class: "theme-default #{content_for?(:menu) ? "" : "no-main-menu"} #{yield(:body_class)}"}
+    = yield(:menu)
+
     - if devise_controller?
       = yield
     - else
@@ -72,3 +74,5 @@
               .col-sm-12
                 = content_tag :div, msg, class: "alert alert-#{type == "notice" ? "success" : "danger"}"
           = content_for?(:content) ? yield(:content) : yield
+
+        #main-menu-bg

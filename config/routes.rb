@@ -19,4 +19,6 @@ Rails.application.routes.draw do
   devise_for :users, path_names: { sign_in: "login", sign_out: "logout", sign_up: "register" }
   get "members" => "users#index", as: :members
   get "users/:id" => "users#show", as: :user
+
+  get "profile" => "profile#settings"
 end
