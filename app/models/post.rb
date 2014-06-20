@@ -14,6 +14,16 @@ class Post < ActiveRecord::Base
   validates :author_id, presence: true
   validates :submission_id, presence: true
 
+  validate do |post|
+    if post.new_record?
+      last_post = post.author.posts.last
+
+      if last_post.present? && Time.now - last_post.created_at < 10.seconds
+        post.errors.add(:base, "Wait 10 seconds before posting.")
+      end
+    end
+  end
+
   def thanks!(user)
     return if user == author
 

@@ -9,11 +9,13 @@ class PostsController < ApplicationController
   def create
     @post = @submission.posts.new(post_params)
     @post.author = current_user
-    @post.save
 
-    @submission.viewed!(current_user)
-
-    render @post
+    if @post.save
+      @submission.viewed!(current_user)
+      render @post
+    else
+      render json: { errors: @post.errors.first.to_s }
+    end
   end
 
   def update
