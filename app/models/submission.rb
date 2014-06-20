@@ -49,6 +49,6 @@ class Submission < ActiveRecord::Base
 
   private
   def clear_cache
-    Rails.cache.delete("submission-#{id}")
+    Rails.cache.delete_matched("submission-#{id}")
   end
 end
