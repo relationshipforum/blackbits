@@ -3,7 +3,13 @@ class SubmissionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :unread]
 
   def index
-    @submissions = Submission.all
+    query = Submission.includes(:posts).order("updated_at DESC")
+
+    if !user_signed_in?
+      query = query.where(private: false)
+    end
+
+    @submissions = query
   end
 
   def show
@@ -56,7 +62,7 @@ class SubmissionsController < ApplicationController
   end
 
   def submission_params
-    params.require(:submission).permit(:title, :forum_id, posts_attributes: [:body])
+    params.require(:submission).permit(:title, :forum_id, :private, posts_attributes: [:body])
   end
 
   def post_params

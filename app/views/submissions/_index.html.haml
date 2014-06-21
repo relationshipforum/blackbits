@@ -11,6 +11,8 @@
       - submissions.each do |submission|
         %tr
           %td
+            - if submission.private?
+              %i.fa.fa-eye
             - if submission.viewed_by?(current_user)
               = link_to submission, unread_submission_path(submission)
             - else
