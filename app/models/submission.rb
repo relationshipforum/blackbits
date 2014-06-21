@@ -10,8 +10,6 @@ class Submission < ActiveRecord::Base
   validates :title, presence: true
   validates :author_id, presence: true
 
-  after_save :clear_cache
-
   def to_s
     title
   end
@@ -46,10 +44,5 @@ class Submission < ActiveRecord::Base
 
     view = View.select("viewed_at").where(user_id: user.id, submission_id: id).last
     view && view.viewed_at >= updated_at
-  end
-
-  private
-  def clear_cache
-    Rails.cache.delete_matched("submission-#{id}")
   end
 end
