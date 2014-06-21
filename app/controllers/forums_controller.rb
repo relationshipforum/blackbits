@@ -6,6 +6,13 @@ class ForumsController < ApplicationController
   end
 
   def show
+    query = Submission.includes(posts: [:author]).includes(:forum).order("updated_at DESC")
+
+    if user_signed_in?
+      @views = current_user.views.where("submission_id IN (?)", query.map(&:id))
+    end
+
+    @submissions = query.where(forum_id: @forum.id)
   end
 
   private
