@@ -13,7 +13,7 @@
           %td
             - if submission.private?
               %i.fa.fa-eye
-            - if submission.viewed_by?(current_user)
+            - if @views && @views.find { |v| v.submission_id == submission.id }.present?
               = link_to submission, unread_submission_path(submission)
             - else
               %strong
@@ -21,10 +21,9 @@
             %br
             Started by
             = link_to submission.posts.first.author, submission.posts.first.author
-          - cache("submission-#{submission.id}") do
-            %td= link_to submission.forum, submission.forum
-            %td= submission.posts.count - 1
-            %td
-              = link_to submission.posts.last.author, submission.posts.last.author
-              %br
-              = l submission.posts.last.created_at
+          %td= link_to submission.forum, submission.forum
+          %td= submission.posts_count - 1
+          %td
+            = link_to submission.posts.last.author, submission.posts.last.author
+            %br
+            = l submission.posts.last.created_at

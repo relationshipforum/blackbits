@@ -8,7 +8,7 @@ class Post < ActiveRecord::Base
   after_save :clear_cache
 
   belongs_to :author, class_name: "User"
-  belongs_to :submission, inverse_of: :posts
+  belongs_to :submission, counter_cache: true, inverse_of: :posts
   has_many :thanks, dependent: :destroy
 
   validates :body, presence: true

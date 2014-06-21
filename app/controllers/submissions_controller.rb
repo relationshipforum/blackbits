@@ -3,10 +3,12 @@ class SubmissionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :unread]
 
   def index
-    query = Submission.includes(:posts).order("updated_at DESC")
+    query = Submission.includes(posts: [:author]).includes(:forum).order("updated_at DESC")
 
     if !user_signed_in?
       query = query.where(private: false)
+    else
+      @views = current_user.views.where("submission_id IN (?)", query.map(&:id))
     end
 
     @submissions = query

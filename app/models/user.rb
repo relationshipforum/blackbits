@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :submissions, foreign_key: "author_id"
   has_many :posts, foreign_key: "author_id"
   has_many :thanks
+  has_many :views, dependent: :destroy
 
   validates :avatar_url, format: { with: /(png|jpe?g)\Z/, allow_nil: true }
 

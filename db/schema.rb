@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140621152342) do
+ActiveRecord::Schema.define(version: 20140621155636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,16 +54,6 @@ ActiveRecord::Schema.define(version: 20140621152342) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
-  create_table "notifications", force: true do |t|
-    t.integer  "post_id"
-    t.integer  "recipient_id"
-    t.integer  "actor_id"
-    t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "unread"
-  end
-
   create_table "posts", force: true do |t|
     t.integer  "submission_id"
     t.integer  "author_id"
@@ -80,7 +70,8 @@ ActiveRecord::Schema.define(version: 20140621152342) do
     t.datetime "updated_at"
     t.boolean  "locked"
     t.string   "slug"
-    t.boolean  "private",    default: false
+    t.boolean  "private",     default: false
+    t.integer  "posts_count", default: 0
   end
 
   add_index "submissions", ["slug"], name: "index_submissions_on_slug", unique: true, using: :btree
@@ -115,7 +106,6 @@ ActiveRecord::Schema.define(version: 20140621152342) do
     t.string   "location"
     t.string   "avatar_url"
     t.string   "agent"
-    t.string   "hostmask"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
