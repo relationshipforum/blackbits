@@ -10869,7 +10869,7 @@ for(d=[],m=a=b=this.ymin,c=this.ymax;k>0?c>=a:a>=c;m=a+=k)d.push(m);return d}.ca
         panel.scrollTop(panel[0].scrollHeight);
     };
     socket.onclose = function () {
-        window.location.reload(true);
+        //window.location.reload(true);
     };
 
     function sendMessage() {

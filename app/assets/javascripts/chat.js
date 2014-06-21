@@ -28,7 +28,7 @@
         panel.scrollTop(panel[0].scrollHeight);
     };
     socket.onclose = function () {
-        window.location.reload(true);
+        //window.location.reload(true);
     };
 
     function sendMessage() {
