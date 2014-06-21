@@ -6,9 +6,11 @@ class User < ActiveRecord::Base
   has_many :posts, foreign_key: "author_id"
   has_many :thanks
 
-  has_attached_file :avatar, default_url: "pixel-admin/avatar.png"
-  validates_attachment_content_type :avatar, content_type: /\Aimage/
-  validates_attachment_file_name :avatar, matches: [/png\Z/, /jpe?g\Z/]
+  validates :avatar_url, format: { with: /(png|jpe?g)\Z/, allow_nil: true }
+
+  def avatar_url
+    read_attribute(:avatar_url) || "pixel-admin/avatar.png"
+  end
 
   def friendly_gender
     gender == false ? "female" : "male"

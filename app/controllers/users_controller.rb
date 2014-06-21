@@ -4,9 +4,11 @@ class UsersController < ApplicationController
   end
 
   def update
-    current_user.update_attributes(update_user_params)
-
-    redirect_to :back, notice: "Updated successfully!"
+    if current_user.update_attributes(update_user_params)
+      redirect_to :back, notice: "Updated successfully!"
+    else
+      redirect_to :back, alert: "There was a problem with your submission."
+    end
   end
 
   def show
@@ -14,6 +16,6 @@ class UsersController < ApplicationController
 
   private
   def update_user_params
-    params.require(:user).permit(:title, :country, :location, :signature, :password, :password_confirmation)
+    params.require(:user).permit(:avatar_url, :title, :country, :location, :signature, :password, :password_confirmation)
   end
 end
