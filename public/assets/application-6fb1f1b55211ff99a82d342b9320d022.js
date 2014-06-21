@@ -10872,9 +10872,11 @@ for(d=[],m=a=b=this.ymin,c=this.ymax;k>0?c>=a:a>=c;m=a+=k)d.push(m);return d}.ca
 
     function sendMessage() {
         var input = $("#chat-input").val();
-        socket.send(input);
 
-        $("#chat-input").val("");
+        if (input) {
+            socket.send(input);
+            $("#chat-input").val("");
+        }
 
         return false;
     }

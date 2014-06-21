@@ -31,9 +31,11 @@
 
     function sendMessage() {
         var input = $("#chat-input").val();
-        socket.send(input);
 
-        $("#chat-input").val("");
+        if (input) {
+            socket.send(input);
+            $("#chat-input").val("");
+        }
 
         return false;
     }

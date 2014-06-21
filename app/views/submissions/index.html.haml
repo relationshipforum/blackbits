@@ -13,7 +13,7 @@
           %span.btn-label.icon.fa.fa-plus
           New Thread
 
-  = render partial: "submissions/index", locals: { submissions: Submission.order("updated_at DESC") }
+  = render partial: "submissions/index", locals: { submissions: Submission.includes(:posts).order("updated_at DESC") }
 
 - if user_signed_in?
   = render partial: "submissions/new"
