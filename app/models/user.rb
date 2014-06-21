@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :views, dependent: :destroy
 
   before_validation :https_avatar_url
-  validates :avatar_url, format: { with: /\Ahttps\:\/\/i\.imgur\.com\/(\w+)\.(png|jpe?g)\Z/, allow_nil: true }
+  validates :avatar_url, format: { with: /\Ahttps\:\/\/i\.imgur\.com\/(\w+)\.(png|jpe?g)\Z/, allow_nil: true, unless: Proc.new { |user| user.avatar_url == "pixel-admin/avatar.png" } }
 
   def avatar_url
     read_attribute(:avatar_url) || "pixel-admin/avatar.png"
