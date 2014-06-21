@@ -1,3 +1,5 @@
+var moment = window.moment || {};
+
 (function () {
     "use strict";
 
@@ -13,10 +15,12 @@
     function onMessage(e) {
         var data = JSON.parse(e.data),
             panel = $("#chat .panel-body"),
+            time = moment(data.timestamp),
             template;
 
         template = " " +
             "<div class='message' style='padding-top:0px'>" +
+                "(" + time.format("MM/DD/YYYY h:mm a") + ") " +
                 "<a href='/users/" + data.slug + "'>" +
                     data.username +
                 "</a>" +

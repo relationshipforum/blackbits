@@ -7,7 +7,11 @@ class ChatsController < ApplicationController
       redis_thread = Thread.new do
         Redis.new(url: REDIS_URL).subscribe "chat" do |on|
           on.message do |channel, message|
-            tubesock.send_data(message) if message.present?
+            if message.present?
+              hash = JSON.parse(message)
+              hash[:timestamp] = Time.now
+              tubesock.send_data(JSON(hash))
+            end
           end
         end
       end
