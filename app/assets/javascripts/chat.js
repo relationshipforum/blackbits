@@ -12,7 +12,6 @@
 
     socket = new WebSocket(url);
     socket.onmessage = function (e) {
-        console.log(e.data);
         var data = JSON.parse(e.data),
             panel = $("#chat .panel-body"),
             template;
@@ -27,6 +26,9 @@
 
         panel.append(template);
         panel.scrollTop(panel[0].scrollHeight);
+    };
+    socket.onclose = function () {
+        window.location.reload(true);
     };
 
     function sendMessage() {
@@ -51,7 +53,7 @@
     $(document).on("ready", function () {
         var panel = $("#chat .panel-body");
 
-        if (panel.length) {
+        if (panel && panel[0] && panel[0].scrollHeight) {
             panel.scrollTop(panel[0].scrollHeight);
         }
     });
