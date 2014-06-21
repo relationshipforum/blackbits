@@ -4,7 +4,7 @@ class ChatsController < ApplicationController
   def socket
     hijack do |tubesock|
       redis_thread = Thread.new do
-        Redis.new.subscribe "chat" do |on|
+        Redis.new(url: REDIS_URL).subscribe "chat" do |on|
           on.message do |channel, message|
             tubesock.send_data message
           end
@@ -16,7 +16,7 @@ class ChatsController < ApplicationController
         # note: this echoes through the sub above
         Chat.create(user: current_user, message: m)
 
-        Redis.new.publish "chat", JSON({
+        Redis.new(url: REDIS_URL).publish "chat", JSON({
           username: current_user.username,
           slug: current_user.slug,
           message: m
