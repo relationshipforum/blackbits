@@ -39,24 +39,23 @@
           %strong= link_to author, author
           %br
           %strong= author.title
-        .pull-right.col-sm-3
-          .pull-left
-            Join Date:
-            - if author.location.present?
-              %br
-              Location:
-            %br
-            Posts:
-            %br
-            Thanked:
+        .pull-right.col-sm-6
           .pull-right
+            %strong
+              Joined:
             = l author.created_at
             - if author.location.present?
               %br
+              %strong
+                Location:
               = author.location
             %br
+            %strong
+              Posts:
             = author.posts.count
             %br
+            %strong
+              Thanked:
             = Thank.thank_stats_for(author)
 
 
