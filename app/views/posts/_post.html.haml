@@ -42,12 +42,18 @@
         .pull-right.col-sm-3
           .pull-left
             Join Date:
+            - if author.location.present?
+              %br
+              Location:
             %br
             Posts:
             %br
             Thanked:
           .pull-right
             = l author.created_at
+            - if author.location.present?
+              %br
+              = author.location
             %br
             = author.posts.count
             %br
