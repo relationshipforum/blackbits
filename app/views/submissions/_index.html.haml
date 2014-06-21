@@ -11,7 +11,7 @@
       - submissions.each do |submission|
         %tr
           %td
-            - if @views && @views.find { |v| v.submission_id == submission.id }.present?
+            - if submission.viewed_by?(current_user)
               = link_to submission, unread_submission_path(submission)
             - else
               %strong
