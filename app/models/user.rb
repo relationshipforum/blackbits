@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :thanks
   has_many :views, dependent: :destroy
 
-  validates :avatar_url, format: { with: /(png|jpe?g)\Z/, allow_nil: true }
+  validates :avatar_url, format: { with: /\Ahttps\:\/\/i\.imgur\.com\/(\w+)\.(png|jpe?g)\Z/, allow_nil: true }
 
   def avatar_url
     read_attribute(:avatar_url) || "pixel-admin/avatar.png"
