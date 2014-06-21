@@ -10851,8 +10851,7 @@ for(d=[],m=a=b=this.ymin,c=this.ymax;k>0?c>=a:a>=c;m=a+=k)d.push(m);return d}.ca
 
     url += "://" + window.location.host + "/chats/socket";
 
-    socket = new WebSocket(url);
-    socket.onmessage = function (e) {
+    function onMessage(e) {
         var data = JSON.parse(e.data),
             panel = $("#chat .panel-body"),
             template;
@@ -10867,10 +10866,11 @@ for(d=[],m=a=b=this.ymin,c=this.ymax;k>0?c>=a:a>=c;m=a+=k)d.push(m);return d}.ca
 
         panel.append(template);
         panel.scrollTop(panel[0].scrollHeight);
-    };
-    socket.onclose = function () {
-        //window.location.reload(true);
-    };
+    }
+
+    function onClose() {
+        window.location.reload(true);
+    }
 
     function sendMessage() {
         var input = $("#chat-input").val();
@@ -10896,6 +10896,10 @@ for(d=[],m=a=b=this.ymin,c=this.ymax;k>0?c>=a:a>=c;m=a+=k)d.push(m);return d}.ca
 
         if (panel && panel[0] && panel[0].scrollHeight) {
             panel.scrollTop(panel[0].scrollHeight);
+
+            socket = new WebSocket(url);
+            socket.onmessage = onMessage;
+            socket.onclose = onClose;
         }
     });
 }());
