@@ -5,9 +5,7 @@ class SubmissionsController < ApplicationController
   def index
     query = Submission.includes(posts: [:author]).includes(:forum).order("updated_at DESC")
 
-    if !user_signed_in?
-      query = query.where(private: false)
-    else
+    if user_signed_in?
       @views = current_user.views.where("submission_id IN (?)", query.map(&:id))
     end
 
@@ -15,10 +13,6 @@ class SubmissionsController < ApplicationController
   end
 
   def show
-    if @submission.private? && !user_signed_in?
-      redirect_to(root_path, alert: "That thread is private.") and return
-    end
-
     @page = params[:page].to_i || 1
     @posts = @submission.posts.page(@page)
     @submission.viewed!(current_user)
@@ -68,7 +62,7 @@ class SubmissionsController < ApplicationController
   end
 
   def submission_params
-    params.require(:submission).permit(:title, :forum_id, :private, posts_attributes: [:body])
+    params.require(:submission).permit(:title, :forum_id, posts_attributes: [:body])
   end
 
   def post_params

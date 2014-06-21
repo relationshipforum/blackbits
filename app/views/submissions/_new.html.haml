@@ -19,12 +19,6 @@
               = post_field.label :body, class: "col-sm-2 control-label"
               .col-sm-10
                 = post_field.text_area :body, class: "form-control markdown", rows: 15
-          .row.form-group
-            .col-sm-10.col-sm-offset-2
-              .checkbox
-                %label
-                  %input{type: "checkbox", name: "submission[private]", class: "px"}
-                    %span.lbl Private
         .modal-footer
           %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Cancel
           %button.btn.btn-primary{type: "submit"} Create Thread

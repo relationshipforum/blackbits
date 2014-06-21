@@ -11,8 +11,6 @@
       - submissions.each do |submission|
         %tr
           %td
-            - if submission.private?
-              %i.fa.fa-eye
             - if @views && @views.find { |v| v.submission_id == submission.id }.present?
               = link_to submission, unread_submission_path(submission)
             - else
