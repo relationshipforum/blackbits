@@ -20,7 +20,7 @@ var moment = window.moment || {};
 
         template = " " +
             "<div class='message' style='padding-top:0px'>" +
-                "(" + time.format("MM/DD/YYYY h:mm a") + ") " +
+                "(" + time.format("h:mm a") + ") " +
                 "<a href='/users/" + data.slug + "'>" +
                     data.username +
                 "</a>" +
