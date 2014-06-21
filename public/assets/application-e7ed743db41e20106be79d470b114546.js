@@ -10886,6 +10886,14 @@ for(d=[],m=a=b=this.ymin,c=this.ymax;k>0?c>=a:a>=c;m=a+=k)d.push(m);return d}.ca
             e.preventDefault();
         }
     });
+
+    $(document).on("ready", function () {
+        var panel = $("#chat .panel-body");
+
+        if (panel.length) {
+            panel.scrollTop(panel[0].scrollHeight);
+        }
+    });
 }());
 
 

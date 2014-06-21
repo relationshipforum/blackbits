@@ -45,4 +45,12 @@
             e.preventDefault();
         }
     });
+
+    $(document).on("ready", function () {
+        var panel = $("#chat .panel-body");
+
+        if (panel.length) {
+            panel.scrollTop(panel[0].scrollHeight);
+        }
+    });
 }());

@@ -1,6 +1,6 @@
 #chat.panel.widget-chat
   .panel-body{style: "min-height: 400px; max-height: 400px; overflow-y: scroll"}
-    - Chat.all.each do |chat|
+    - Chat.includes(:user).last(100).each do |chat|
       .message{style: "padding-top:0px"}
         = "#{link_to(chat.user, "/users/#{chat.user.slug}")}:".html_safe
         = chat
