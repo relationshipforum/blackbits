@@ -13,6 +13,10 @@ class SubmissionsController < ApplicationController
   end
 
   def show
+    if @submission.private? && !user_signed_in?
+      redirect_to(root_path, alert: "That thread is private.") and return
+    end
+
     @page = params[:page].to_i || 1
     @posts = @submission.posts.page(@page)
     @submission.viewed!(current_user)
