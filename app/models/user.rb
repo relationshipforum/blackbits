@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :thanks
   has_many :views, dependent: :destroy
 
+  before_validation :https_avatar_url
   validates :avatar_url, format: { with: /\Ahttps\:\/\/i\.imgur\.com\/(\w+)\.(png|jpe?g)\Z/, allow_nil: true }
 
   def avatar_url
@@ -19,6 +20,14 @@ class User < ActiveRecord::Base
 
   def to_s
     username
+  end
+
+  def https_avatar_url
+    url = avatar_url.to_s
+    url.sub!("http:", "https:")
+    url = nil if url.blank?
+
+    self.avatar_url = url
   end
 
   attr_accessor :login
