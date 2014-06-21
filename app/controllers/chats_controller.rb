@@ -1,5 +1,6 @@
 class ChatsController < ApplicationController
   include Tubesock::Hijack
+  before_filter :authenticate_user!
 
   def socket
     hijack do |tubesock|
