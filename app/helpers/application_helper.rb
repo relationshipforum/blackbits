@@ -5,7 +5,7 @@ module ApplicationHelper
     @keys[key]   += 1
   end
 
-  def current_user_avatar
-    image_tag(current_user.avatar_url, class: "avatar")
+  def avatar(user = current_user)
+    image_tag(user.avatar_url, class: "avatar")
   end
 end

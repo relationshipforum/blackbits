@@ -48,7 +48,7 @@
                           %input.form-control{:placeholder => "Search", :type => "text"}/
                       %li.dropdown
                         %a.dropdown-toggle.user-menu{"data-toggle" => "dropdown", :href => "#"}
-                          = current_user_avatar
+                          = avatar
                           %span#user{data: { id: current_user.id }}
                             = current_user
                         %ul.dropdown-menu
