@@ -55,14 +55,16 @@
             var panel = $(this).closest(".panel"),
                 postId = panel.data("post-id");
 
-            $.ajax({
-                url: "/posts/" + postId,
-                method: "DELETE",
+            if (confirm("Are you sure you want to delete this post?")) {
+                $.ajax({
+                    url: "/posts/" + postId,
+                    method: "DELETE",
 
-                success: function () {
-                    panel.remove();
-                }
-            });
+                    success: function () {
+                        panel.remove();
+                    }
+                });
+            }
         });
     });
 }());
