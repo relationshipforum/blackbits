@@ -60,8 +60,12 @@
                     url: "/posts/" + postId,
                     method: "DELETE",
 
-                    success: function () {
-                        panel.remove();
+                    success: function (data) {
+                        if (data && data.redirect) {
+                            window.location = "/";
+                        } else {
+                            panel.remove();
+                        }
                     }
                 });
             }

@@ -26,8 +26,16 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post.destroy
-    head :ok
+    submission = @post.submission
+    if submission.posts.first == @post
+      submission.destroy
+
+      render json: { redirect: true }
+    else
+      @post.destroy
+
+      head :ok
+    end
   end
 
   def thanks

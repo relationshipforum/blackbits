@@ -13436,8 +13436,12 @@ for(d=[],m=a=b=this.ymin,c=this.ymax;k>0?c>=a:a>=c;m=a+=k)d.push(m);return d}.ca
                     url: "/posts/" + postId,
                     method: "DELETE",
 
-                    success: function () {
-                        panel.remove();
+                    success: function (data) {
+                        if (data && data.redirect) {
+                            window.location = "/";
+                        } else {
+                            panel.remove();
+                        }
                     }
                 });
             }
