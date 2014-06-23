@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     end
   end
 
-  root to: "submissions#index"
+  root to: "forums#index"
 
   devise_for :users,  path_names: { sign_in: "login", sign_out: "logout", sign_up: "register" },
                       controllers: { sessions: "sessions" }
