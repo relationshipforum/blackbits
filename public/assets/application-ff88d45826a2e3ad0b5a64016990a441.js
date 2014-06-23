@@ -13400,9 +13400,10 @@ for(d=[],m=a=b=this.ymin,c=this.ymax;k>0?c>=a:a>=c;m=a+=k)d.push(m);return d}.ca
             var panel = $(this).closest(".panel").first(),
                 postId = panel.data("post-id"),
                 postBody = $(".post-body[data-post-id=" + postId + "]").html().trim(),
-                text = $(postBody).text().replace(/\n/g, "\n> ").replace(/[^\S\n]+/g, " ");
+                text = $(postBody).text().replace(/\n/g, "\n> ").replace(/[^\S\n]+/g, " "),
+                currentVal = $("#post_body").val();
 
-            $("#post_body").val("> " + text + "\n\n");
+            $("#post_body").val((currentVal ? currentVal + "\n\n" : "") + "> " + text + "\n\n");
             $(window).scrollTop($(document).height());
             $("#message-details-reply textarea").focus();
         });
