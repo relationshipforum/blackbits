@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :username, use: :slugged
 
+  acts_as_paranoid
+
   has_many :submissions, foreign_key: "author_id"
   has_many :posts, foreign_key: "author_id"
   has_many :thanks

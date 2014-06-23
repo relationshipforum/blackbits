@@ -2,6 +2,8 @@ class Submission < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: :slugged
 
+  acts_as_paranoid
+
   belongs_to :forum
   belongs_to :author, class_name: "User"
   has_many :posts, -> { order "created_at ASC" }, dependent: :destroy

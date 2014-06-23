@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140621161607) do
+ActiveRecord::Schema.define(version: 20140623201506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,7 +60,10 @@ ActiveRecord::Schema.define(version: 20140621161607) do
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "deleted_at"
   end
+
+  add_index "posts", ["deleted_at"], name: "index_posts_on_deleted_at", using: :btree
 
   create_table "submissions", force: true do |t|
     t.string   "title"
@@ -71,8 +74,10 @@ ActiveRecord::Schema.define(version: 20140621161607) do
     t.boolean  "locked"
     t.string   "slug"
     t.integer  "posts_count", default: 0
+    t.datetime "deleted_at"
   end
 
+  add_index "submissions", ["deleted_at"], name: "index_submissions_on_deleted_at", using: :btree
   add_index "submissions", ["slug"], name: "index_submissions_on_slug", unique: true, using: :btree
 
   create_table "thanks", force: true do |t|
@@ -80,7 +85,10 @@ ActiveRecord::Schema.define(version: 20140621161607) do
     t.integer  "post_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "deleted_at"
   end
+
+  add_index "thanks", ["deleted_at"], name: "index_thanks_on_deleted_at", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",                null: false
@@ -105,8 +113,10 @@ ActiveRecord::Schema.define(version: 20140621161607) do
     t.string   "location"
     t.string   "avatar_url"
     t.string   "agent"
+    t.datetime "deleted_at"
   end
 
+  add_index "users", ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
@@ -116,8 +126,10 @@ ActiveRecord::Schema.define(version: 20140621161607) do
     t.integer  "submission_id"
     t.integer  "user_id"
     t.datetime "viewed_at"
+    t.datetime "deleted_at"
   end
 
+  add_index "views", ["deleted_at"], name: "index_views_on_deleted_at", using: :btree
   add_index "views", ["submission_id"], name: "index_views_on_submission_id", using: :btree
   add_index "views", ["user_id"], name: "index_views_on_user_id", using: :btree
 
