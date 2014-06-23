@@ -6,6 +6,6 @@ module ApplicationHelper
   end
 
   def avatar(user = current_user)
-    image_tag(user.avatar_url, class: "avatar")
+    image_tag(user.avatar_url, class: "avatar", height: 40, width: 40)
   end
 end
