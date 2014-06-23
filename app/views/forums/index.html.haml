@@ -37,7 +37,7 @@
               %td= forum.submissions.count
               %td= forum.posts.count
               %td
-                = link_to last_submission, last_submission
+                = link_to last_submission, unread_submission_path(last_submission)
                 %br
                 by
                 = "#{link_to last_post.author, last_post.author}, at".html_safe
