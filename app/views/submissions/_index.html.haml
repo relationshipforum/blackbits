@@ -12,10 +12,10 @@
         %tr
           %td
             - if submission.viewed_by?(current_user)
-              = link_to submission, unread_submission_path(submission)
+              = link_to submission, unread_submission_path(submission), title: submission.alt_text
             - else
               %strong
-                = link_to submission, unread_submission_path(submission)
+                = link_to submission, unread_submission_path(submission), title: submission.alt_text
             %br
             Started by
             = link_to submission.posts.first.author, submission.posts.first.author

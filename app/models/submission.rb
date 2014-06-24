@@ -47,4 +47,10 @@ class Submission < ActiveRecord::Base
     view = View.select("viewed_at").where(user_id: user.id, submission_id: id).last
     view && view.viewed_at >= updated_at
   end
+
+  def alt_text
+    posts.first.body.gsub(/\s+/, " ")[0..255]
+  rescue
+    ""
+  end
 end
