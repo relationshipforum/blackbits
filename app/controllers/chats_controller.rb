@@ -9,7 +9,7 @@ class ChatsController < ApplicationController
           on.message do |channel, message|
             if message.present?
               hash = JSON.parse(message)
-              hash[:timestamp] = Time.now
+              hash[:timestamp] = Time.now.iso8601
               tubesock.send_data(JSON(hash))
             end
           end
