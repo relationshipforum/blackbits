@@ -11,11 +11,19 @@ class UsersController < ApplicationController
     end
   end
 
+  def root
+    if user_signed_in? && current_user.whats_new_default?
+      redirect_to submissions_path
+    else
+      redirect_to forums_path
+    end
+  end
+
   def show
   end
 
   private
   def update_user_params
-    params.require(:user).permit(:avatar_url, :title, :country, :location, :signature, :password, :password_confirmation)
+    params.require(:user).permit(:avatar_url, :title, :country, :location, :signature, :password, :password_confirmation, :whats_new_default)
   end
 end
