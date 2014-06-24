@@ -15,7 +15,7 @@ var moment = window.moment || {};
     function onMessage(e) {
         var data = JSON.parse(e.data),
             panel = $("#chat .panel-body"),
-            time = moment(data.timestamp.replace(" ", "T").substring(0, 19)),
+            time = moment(data.timestamp.replace(" ", "T").replace(/\s+\-[\d]+$/, "")),
             template;
 
         template = " " +
