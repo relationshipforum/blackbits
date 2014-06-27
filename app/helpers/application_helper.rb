@@ -18,13 +18,4 @@ module ApplicationHelper
 
     kls.join(" ")
   end
-
-  def unseen_chats_label
-    return if controller_name == "chats"
-
-    if user_signed_in?
-      count = Chat.where("created_at > ?", current_user.last_chatted_at).count
-      "<span class='label' style='background:green'>#{count}</span>".html_safe if count > 0
-    end
-  end
 end
