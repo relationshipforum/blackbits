@@ -16,6 +16,7 @@ gem "tubesock"
 gem "json"
 gem "momentjs-rails"
 gem "paranoia", "~> 2.0"
+gem "rinku"
 
 gem "sass-rails", "~> 4.0.3"
 gem "uglifier", ">= 1.3.0"

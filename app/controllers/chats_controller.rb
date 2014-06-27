@@ -9,6 +9,7 @@ class ChatsController < ApplicationController
           on.message do |channel, message|
             if message.present?
               hash = JSON.parse(message)
+              hash["message"] = Rinku.auto_link(hash["message"], :all, 'target="_blank"')
               hash[:timestamp] = Time.now.iso8601
               tubesock.send_data(JSON(hash))
             end

@@ -4,7 +4,7 @@
       .message{style: "padding-top:0px"}
         = "(#{chat.created_at.strftime("%l:%M %P").strip}) "
         = "#{link_to(chat.user, "/users/#{chat.user.slug}")}:".html_safe
-        = chat
+        = Rinku.auto_link(chat.message, :all, 'target="_blank"').html_safe
 
   %form.panel-footer.chat-controls
     .chat-controls-input
