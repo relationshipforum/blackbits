@@ -7,8 +7,8 @@
       ago
       = "(#{l post.created_at})"
 
-    - if user_signed_in?
-      .panel-heading-controls
+    .panel-heading-controls
+      - if user_signed_in?
         - if current_user == author
           %a.btn.btn-xs.btn-info.btn-outline{href: edit_post_path(post)}
             %span.fa.fa-pencil
@@ -27,6 +27,9 @@
             - else
               %span.fa.fa-thumbs-up
               Thanks!
+
+      %button.btn.btn-xs.btn-info.btn-outline.quote-post
+        %a.fa.fa-link.link-post{data: { post_id: post.id }}
 
   .panel-body
     .row

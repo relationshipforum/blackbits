@@ -46,6 +46,11 @@
             });
         });
 
+        $(document).on("click", ".link-post", function () {
+            window.location.hash = "#post-" + $(this).data("post-id");
+            return false;
+        });
+
         $(document).on("ajax:success", "form#message-details-reply", function (e, response) {
             $(".posts-wrapper").append(response);
             $(window).scrollTop($(document).height());
