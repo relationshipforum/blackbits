@@ -3,6 +3,8 @@ class ChatsController < ApplicationController
   before_filter :authenticate_user!
 
   def socket
+    current_user.update(last_chatted_at: Time.now) rescue nil
+
     hijack do |tubesock|
       redis_thread = Thread.new do
         Redis.new(url: REDIS_URL).subscribe "chat" do |on|
@@ -29,6 +31,7 @@ class ChatsController < ApplicationController
       end
       
       tubesock.onclose do
+        current_user.update(last_chatted_at: Time.now) rescue nil
         redis_thread.kill
       end
     end

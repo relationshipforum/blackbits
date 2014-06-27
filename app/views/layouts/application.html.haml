@@ -43,7 +43,9 @@
                   %li
                     %a{href: forums_path} Forums
                   %li
-                    %a{href: chats_path} Chat
+                    %a{href: chats_path}
+                      = unseen_chats_label
+                      Chat
                   %li
                     %a{href: members_path} Members
                 .right.clearfix
