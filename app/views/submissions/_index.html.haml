@@ -12,6 +12,8 @@
         %tr
           %td
             - if submission.viewed_by?(current_user)
+              - if submission.has_posts_by?(current_user)
+                %i.fa.fa-leaf{style: "color: green"}
               = link_to submission, unread_submission_path(submission), title: submission.alt_text
             - else
               %strong

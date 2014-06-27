@@ -16,6 +16,10 @@ class Submission < ActiveRecord::Base
     title
   end
 
+  def has_posts_by?(user)
+    posts.where(author_id: user.id).exists?
+  end
+
   def first_unread_post(user)
     return posts.first unless user
 
