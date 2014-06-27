@@ -11,10 +11,10 @@
       - submissions.each do |submission|
         %tr
           %td
-            - if submission.has_posts_by?(current_user)
+            - if @posted_submission_ids && @posted_submission_ids.include?(submission.id)
               %i.fa.fa-leaf{style: "color: green"}
 
-            - if submission.viewed_by?(current_user)
+            - if submission.viewed_by?(current_user, @views)
               = link_to submission, unread_submission_path(submission), title: submission.alt_text
             - else
               %strong

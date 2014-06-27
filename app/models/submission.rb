@@ -46,10 +46,11 @@ class Submission < ActiveRecord::Base
     view.update(viewed_at: Time.now)
   end
 
-  def viewed_by?(user)
+  def viewed_by?(user, views = nil)
     return false unless user
+    return false unless views
 
-    view = View.select("viewed_at").where(user_id: user.id, submission_id: id).last
+    view = views.find { |v| v.submission_id == id }
     view && view.viewed_at >= updated_at
   end
 
