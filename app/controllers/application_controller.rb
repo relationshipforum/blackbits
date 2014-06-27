@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :set_time_zone
+  before_filter :check_force_chat
 
   protected
 
@@ -12,5 +13,11 @@ class ApplicationController < ActionController::Base
 
   def set_time_zone
     Time.zone = current_user.time_zone if current_user.try(:time_zone)
+  end
+
+  def check_force_chat
+    if user_signed_in? && current_user.force_chat?
+      redirect_to chats_path, alert: "You are being forced to chat." unless controller_name == "chats"
+    end
   end
 end
