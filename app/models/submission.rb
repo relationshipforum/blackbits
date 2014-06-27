@@ -17,6 +17,7 @@ class Submission < ActiveRecord::Base
   end
 
   def has_posts_by?(user)
+    return false unless user
     posts.where(author_id: user.id).exists?
   end
 
