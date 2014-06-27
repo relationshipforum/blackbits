@@ -9,6 +9,8 @@ class ChatsController < ApplicationController
       redis_thread = Thread.new do
         Redis.new(url: REDIS_URL).subscribe "chat" do |on|
           on.message do |channel, message|
+            current_user.update(last_chatted_at: Time.now) rescue nil
+
             if message.present?
               hash = JSON.parse(message)
               hash[:timestamp] = Time.now.iso8601
