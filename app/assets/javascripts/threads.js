@@ -24,8 +24,20 @@
             var panel = $(this).closest(".panel").first(),
                 postId = panel.data("post-id"),
                 postBody = $(".post-body[data-post-id=" + postId + "]").html().trim(),
-                text = $(postBody).text().replace(/\n/g, "\n> ").replace(/[^\S\n]+/g, " "),
-                currentVal = $("#post_body").val();
+                things = [],
+                currentVal = $("#post_body").val(),
+                text;
+
+            $(postBody).each(function (i, e) {
+                if (!$(e).is("blockquote")) {
+                    things.push(e);
+                }
+            });
+
+            text = $(things).text();
+            text = text.replace(/^\s+/, "");
+            text = text.replace(/\n/g, "\n> ");
+            text = text.replace(/[^\S\n]+/g, " ");
 
             $("#post_body").val((currentVal ? currentVal + "\n\n" : "") + "> " + text + "\n\n");
             $(window).scrollTop($(document).height());
