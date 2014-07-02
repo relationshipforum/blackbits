@@ -28,12 +28,14 @@ module PostsHelper
   end
 
   def gender_icon(author)
-    if author.gender == true
+    if author.gender == 2
       kls = "male"
       color = "1d6c8d"
-    else
+    elsif author.gender == 1
       kls = "female"
       color = "c87299"
+    else
+      return ""
     end
 
     "<i class='panel-title-icon fa fa-#{kls}' style='color:##{color}'></i>".html_safe

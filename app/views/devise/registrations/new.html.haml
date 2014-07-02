@@ -24,13 +24,6 @@
   .form-group
     = f.time_zone_select :time_zone, nil, {}, class: "form-control"
   .form-group
-    .radio
-      %label
-        = f.radio_button :gender, true, class: "px"
-        %span{class: "lbl"} Male
-    .radio
-      %label
-        = f.radio_button :gender, false, class: "px"
-        %span{class: "lbl"} Female
+    = f.select :gender, options_for_select([["Male", "2"], ["Female", "1"], ["Other", "0"]], resource.gender), { value: 1 }, { class: "form-control" }
   .form-actions
     %input.btn.btn-primary.btn-block.btn-lg{:type => "submit", :value => "Sign In"}

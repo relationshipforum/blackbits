@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }
-  validates :gender, inclusion: { in: [false, true] }
+  validates :gender, numericality: { less_than_or_equal_to: 2, greater_than_or_equal_to: 0 }
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
