@@ -16,10 +16,6 @@ class User < ActiveRecord::Base
     read_attribute(:avatar_url) || "pixel-admin/avatar.png"
   end
 
-  def friendly_gender
-    gender == false ? "female" : "male"
-  end
-
   def to_s
     username
   end

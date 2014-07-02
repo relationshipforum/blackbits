@@ -36,7 +36,7 @@
       .post-header
         .pull-left.col-sm-6
           = avatar(author)
-          %i.panel-title-icon.fa{class: "fa-#{author.friendly_gender}"}
+          = gender_icon(author)
           - if author.country.present?
             = country_flag(author.country)
           %strong= link_to author, author
