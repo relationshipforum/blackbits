@@ -13,3 +13,7 @@
 .post-body blockquote {
   font-size: 12px;
 }
+
+.post-body img {
+  max-width: 100%;
+}
