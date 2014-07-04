@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
-  before_filter :set_time_zone
+  before_filter :set_time_zone_and_last_activity
   before_filter :check_force_chat
 
   protected
@@ -11,8 +11,11 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password, :password_confirmation, :current_password) }
   end
 
-  def set_time_zone
-    Time.zone = current_user.time_zone if current_user.try(:time_zone)
+  def set_time_zone_and_last_activity
+    if user_signed_in?
+      Time.zone = current_user.time_zone if current_user.time_zone
+      current_user.update_column(:last_activity, Time.now)
+    end
   end
 
   def check_force_chat
