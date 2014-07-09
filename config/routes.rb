@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     collection { get "socket" }
   end
 
-  resources :forums
+  resources :forums, only: [:index]
   resources :submissions, path: "threads" do
     resources :posts, only: [:create]
 
@@ -29,4 +29,6 @@ Rails.application.routes.draw do
   get "profile/avatar" => "profile#avatar"
   get "profile/settings" => "profile#settings"
   get "profile/signature" => "profile#signature"
+
+  get "forums/:forum_id" => "submissions#index", as: :forum
 end

@@ -47,6 +47,7 @@ class Submission < ActiveRecord::Base
   end
 
   def viewed_by?(user, views = nil)
+    return true if updated_at < Time.now - 1.week
     return false unless user
     return false unless views
 

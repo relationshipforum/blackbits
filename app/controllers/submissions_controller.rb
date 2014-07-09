@@ -1,15 +1,19 @@
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :unread, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show, :unread]
+  before_action :set_page, only: [:index, :show]
+  before_action :set_forum, only: [:index]
 
   def index
     @submissions = Submission.includes(posts: [:author]).includes(:forum).order("updated_at DESC")
+    @submissions = @submissions.where(forum_id: @forum.id) if @forum
+    @submissions = @submissions.page(@page)
+
     @views = current_user.views.where("submission_id IN (?)", @submissions.map(&:id)) if user_signed_in?
     @posted_submission_ids = Post.select("submission_id").where(author_id: current_user.id).where("submission_id IN (?)", @submissions.map(&:id)).map(&:submission_id) if user_signed_in?
   end
 
   def show
-    @page = params[:page].to_i || 1
     @posts = @submission.posts.page(@page)
     @submission.viewed!(current_user)
   end
@@ -63,5 +67,13 @@ class SubmissionsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:body)
+  end
+
+  def set_page
+    @page = params[:page].to_i || 1
+  end
+
+  def set_forum
+    @forum = Forum.friendly.find(params[:forum_id]) if params[:forum_id].present?
   end
 end

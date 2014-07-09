@@ -28,3 +28,8 @@
             = link_to submission.posts.last.author, submission.posts.last.author
             %br
             = l submission.posts.last.created_at
+
+.row
+  .pull-right{style: "margin-right: 12px"}
+    %p
+      = paginate submissions
