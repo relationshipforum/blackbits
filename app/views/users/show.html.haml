@@ -34,3 +34,5 @@
           %a{"data-toggle" => "tab", :href => "#profile-tabs-board"} Latest Posts
       .tab-content.tab-content-bordered.panel-padding
         #profile-tabs-board.widget-article-comments.tab-pane.panel.no-padding.no-border.fade.in.active
+          - @user.posts.last(20).each do |post|
+            = render post
