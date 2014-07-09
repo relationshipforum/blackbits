@@ -26,6 +26,7 @@
   .message-details-reply
     - if user_signed_in?
       = form_for [@submission, @submission.posts.new], { remote: true, html: { id: "message-details-reply" } } do |f|
+        = hidden_field_tag :last_post_id, @submission.posts.where("id IS NOT NULL").last.id
         = f.text_area :body, class: "form-control markdown", rows: 10
         .row{style: "margin-top: 10px; margin-right: 5px;"}
           %button.btn.btn-primary.pull-right Post to Thread

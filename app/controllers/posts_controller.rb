@@ -12,7 +12,13 @@ class PostsController < ApplicationController
 
     if @post.save
       @submission.viewed!(current_user)
-      render @post
+      if last_post_id_param
+        render text: @submission.posts.where("id > ?", last_post_id_param).map { |p|
+          render_to_string p
+        }.join("\n")
+      else
+        render @post
+      end
     else
       render json: { errors: @post.errors.first.to_s }
     end
@@ -56,5 +62,12 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:body)
+  end
+
+  def last_post_id_param
+    last_post_id = params.permit(:last_post_id)[:last_post_id].to_i
+    last_post_id > 0 ? last_post_id : nil
+  rescue
+    nil
   end
 end
