@@ -1,2 +1,36 @@
-%h1 Users#show
-%p Find me in app/views/users/show.html.haml
+- content_for(:body_class, "page-profile")
+
+.profile-full-name
+  %span.text-semibold>= @user
+  's profile
+.profile-row
+  .left-col
+    .profile-block
+      .panel.profile-photo
+        = image_tag @user.avatar_url
+      %br/
+      %a.btn{href: "#"}
+        %i.fa.fa-comment
+    .panel.panel-transparent
+      .panel-heading
+        %span.panel-title Title
+      .panel-body
+        = @user.title
+    .panel.panel-transparent
+      .panel-heading
+        %span.panel-title Statistics
+      .list-group
+        .list-group-item
+          %strong= @user.posts.count
+          Posts
+        .list-group-item
+          %strong= Thank.thank_stats_for(@user)[0]
+          Thanks
+  .right-col
+    %hr.profile-content-hr.no-grid-gutter-h/
+    .profile-content
+      %ul#profile-tabs.nav.nav-tabs
+        %li.active
+          %a{"data-toggle" => "tab", :href => "#profile-tabs-board"} Latest Posts
+      .tab-content.tab-content-bordered.panel-padding
+        #profile-tabs-board.widget-article-comments.tab-pane.panel.no-padding.no-border.fade.in.active

@@ -40,4 +40,10 @@ module PostsHelper
 
     "<i class='panel-title-icon fa fa-#{kls}' style='color:##{color}'></i>".html_safe
   end
+
+  def thanks(author)
+    stats = Thank.thank_stats_for(author)
+
+    "#{stats[0]} times, #{stats[1]} posts"
+  end
 end

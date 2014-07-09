@@ -20,6 +20,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.friendly.find(params[:id])
   end
 
   private

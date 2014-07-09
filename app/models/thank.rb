@@ -11,7 +11,7 @@ class Thank < ActiveRecord::Base
     query = Thank.joins(:post).where("posts.author_id = ?", user.id)
     posts = query.select("DISTINCT thanks.post_id")
 
-    "#{query.count} times, #{posts.count} posts"
+    [query.count, posts.count]
   end
 
   private
