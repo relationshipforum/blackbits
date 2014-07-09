@@ -13,14 +13,14 @@
       - elsif @forum.present?
         = @forum.title
       - else
-        Love Forum - Relationship Discussion Forum
+        Relationship Forum - Online Love Discussion
     %meta{content: "width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0", name: "viewport"}
     %link{href: "//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin", rel: "stylesheet", type: "text/css"}
     %link{href: "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css", rel: "stylesheet"}
     %link{href: "//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css", rel: "stylesheet"}
     %link{href: "/favicon.ico", rel: "shortcut icon"}
-    %meta{name: "keywords", content: "love forum"}
-    %meta{name: "description", content: "Love Relationship Discussion Forum"}
+    %meta{name: "keywords", content: "relationship forum"}
+    %meta{name: "description", content: "Relationship and Love Discussion Forum"}
     = stylesheet_link_tag :application
     = javascript_include_tag :application
 
@@ -35,7 +35,7 @@
           .navbar-inner
             .navbar-header
               %a.navbar-brand{href: root_path}
-                %img{alt: "Love Forum", src: asset_path("logo-small.png")}
+                %img{alt: "Relationship Forum", src: asset_path("logo-small.png")}
               %button.navbar-toggle.collapsed{"data-target" => "#main-navbar-collapse", "data-toggle" => "collapse", :type => "button"}
                 %i.navbar-icon.fa.fa-bars
             #main-navbar-collapse.collapse.navbar-collapse.main-navbar-collapse
