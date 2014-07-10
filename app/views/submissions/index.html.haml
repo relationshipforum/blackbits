@@ -4,6 +4,12 @@
 
 .col-md-10.col-md-offset-1
   .row
+    .pull-left
+      Last Chat by
+      %strong
+        = Chat.last.user
+      = "(#{time_ago_in_words Chat.last.created_at} ago)"
+
     .pull-right
       - if user_signed_in?
         %button.btn.btn-flat.btn-labeled.btn-primary{data: { toggle: "modal", target: "#new-thread-modal" }}
