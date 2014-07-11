@@ -25,6 +25,8 @@ class PostsController < ApplicationController
   end
 
   def update
+    authorize! :edit, @post
+
     @post.update_attributes(post_params)
     page = (@post.submission.posts.index(@post) / 10) + 1
 
@@ -57,7 +59,7 @@ class PostsController < ApplicationController
   end
 
   def set_post
-    @post = current_user.posts.find(params[:id])
+    @post = Post.find(params[:id])
   end
 
   def post_params

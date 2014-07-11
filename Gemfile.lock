@@ -33,6 +33,7 @@ GEM
     byebug (3.1.2)
       columnize (~> 0.8)
       debugger-linecache (~> 1.2)
+    cancancan (1.8.2)
     carmen (1.0.0)
       unicode_utils (~> 1.4.0)
     carmen-rails (1.0.1)
@@ -191,6 +192,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  cancancan
   carmen-rails
   coffee-rails (~> 4.0.0)
   devise

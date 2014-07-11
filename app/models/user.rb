@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  ROLES = %i[admin banned]
+
   extend FriendlyId
   friendly_id :username, use: :slugged
 
@@ -26,6 +28,10 @@ class User < ActiveRecord::Base
     url = nil if url.blank?
 
     self.avatar_url = url
+  end
+
+  def admin?
+    role == "admin"
   end
 
   attr_accessor :login
