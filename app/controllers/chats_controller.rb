@@ -3,6 +3,8 @@ class ChatsController < ApplicationController
   before_filter :authenticate_user!
 
   def socket
+    REDIS.sadd("user_list", current_user.username)
+
     hijack do |tubesock|
       redis_thread = Thread.new do
         Redis.new(url: REDIS_URL).subscribe "chat" do |on|
@@ -30,6 +32,7 @@ class ChatsController < ApplicationController
       end
       
       tubesock.onclose do
+        REDIS.srem("user_list", current_user.username)
         redis_thread.kill
       end
     end
