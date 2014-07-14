@@ -26,7 +26,7 @@ class ChatsController < ApplicationController
           Redis.new(url: REDIS_URL).publish "chat", JSON({
             username: current_user.username,
             slug: current_user.slug,
-            message: m
+            message: m.force_encoding("utf-8")
           })
         end
       end
