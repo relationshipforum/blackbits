@@ -18,10 +18,17 @@ Rails.application.routes.draw do
     end
   end
 
-  root to: "users#root"
-
   devise_for :users,  path_names: { sign_in: "login", sign_out: "logout", sign_up: "register" },
                       controllers: { sessions: "sessions" }
+
+  authenticated :user do
+    root to: "users#root", as: :authenticated_root
+  end
+
+  unauthenticated do
+    root to: "forums#index"
+  end
+
   get "members" => "users#index", as: :members
   resources :users
 
