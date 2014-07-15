@@ -1,5 +1,5 @@
 #chat.panel.widget-chat
-  .panel-body{style: "min-height: 400px; max-height: 400px; overflow-y: scroll"}
+  .panel-body{style: "min-height: 400px; max-height: 400px; overflow-y: scroll; word-wrap: break-word"}
     - Chat.includes(:user).last(100).each do |chat|
       .message{style: "padding-top:0px"}
         = "(#{chat.created_at.strftime("%l:%M %P").strip}) "
