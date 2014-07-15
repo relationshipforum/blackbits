@@ -20,7 +20,7 @@
     %link{href: "//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css", rel: "stylesheet"}
     %link{href: "/favicon.ico", rel: "shortcut icon"}
     %meta{name: "keywords", content: "relationship forum"}
-    %meta{name: "description", content: "Relationship and Love Discussion Forum"}
+    %meta{name: "description", content: "The best relationship and love forum to get or give romantic advice."}
     = stylesheet_link_tag :application
     = javascript_include_tag :application
 
@@ -52,9 +52,6 @@
                 .right.clearfix
                   %ul.nav.navbar-nav.pull-right.right-navbar-nav
                     - if user_signed_in?
-                      %li
-                        %form.navbar-form.pull-left
-                          %input.form-control{:placeholder => "Search", :type => "text"}/
                       %li.dropdown
                         %a.dropdown-toggle.user-menu{"data-toggle" => "dropdown", :href => "#"}
                           = avatar
