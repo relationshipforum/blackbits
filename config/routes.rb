@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     collection { get "socket" }
   end
 
+  resources :conversations
   resources :forums, only: [:index]
   resources :submissions, path: "threads" do
     resources :posts, only: [:create]

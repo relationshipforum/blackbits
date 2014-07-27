@@ -52,6 +52,10 @@
                 .right.clearfix
                   %ul.nav.navbar-nav.pull-right.right-navbar-nav
                     - if user_signed_in?
+                      %li.nav-icon-btn.nav-icon-btn-success
+                        %a{href: conversations_path}
+                          %span{class: "label"} 10
+                          %i.nav-icon.fa.fa-envelope
                       %li.dropdown
                         %a.dropdown-toggle.user-menu{"data-toggle" => "dropdown", :href => "#"}
                           = avatar
