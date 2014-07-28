@@ -29,6 +29,8 @@ Rails.application.routes.draw do
     root to: "forums#index"
   end
 
+  get "about" => "pages#about"
+  get "rules" => "pages#rules"
   get "members" => "users#index", as: :members
   resources :users
 
