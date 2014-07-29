@@ -47,8 +47,6 @@
                     %a{href: forums_path} Forums
                   %li
                     %a{href: chats_path} Chat
-                  %li
-                    %a{href: members_path} Members
                 .right.clearfix
                   %ul.nav.navbar-nav.pull-right.right-navbar-nav
                     - if user_signed_in?
@@ -87,7 +85,22 @@
                 = content_tag :div, msg, class: "alert alert-#{type == "notice" ? "success" : "danger"}"
           = content_for?(:content) ? yield(:content) : yield
 
+          - unless content_for?(:menu)
+            %footer.col-md-10.col-md-offset-1
+              .row{style: "text-align: center"}
+                = link_to "About", "/about"
+                &bull;
+                = link_to "Members", members_path
+                &bull;
+                = link_to "Google+", "https://plus.google.com/+RelationshipforumOrg1", rel: "publisher"
+                &bull;
+                = link_to "Twitter", "https://twitter.com/relations_forum"
+                &bull;
+                = link_to "GitHub", "https://github.com/relationshipforum/blackbits"
+
         #main-menu-bg
+
+
     - if Rails.env == "production"
       :javascript
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
