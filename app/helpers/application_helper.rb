@@ -11,7 +11,7 @@ module ApplicationHelper
 
   def meta_description
     s = '<meta name="description" content="'
-    content = "The best relationship and love forum to get or give romantic advice."
+    content = "The best love and relationship forum for romantic advice."
 
     if @submission.present?
       content = @submission.posts.first.body
