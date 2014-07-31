@@ -23,7 +23,10 @@ class ChatsController < ApplicationController
         if m.present?
           cid = conversation_id
 
-          Chat.create(user: current_user, message: m, conversation_id: cid)
+          attrs = { user: current_user, message: m }
+          attrs.merge!({ conversation_id: cid }) unless cid == "global"
+
+          Chat.create(attrs)
 
           Redis.new(url: REDIS_URL).publish "chat.#{cid}", JSON({
             username: current_user.username,
