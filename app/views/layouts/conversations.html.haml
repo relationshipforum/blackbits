@@ -1,65 +1,19 @@
 - content_for :body_class, "page-mail"
-.mail-nav
-  .compose-btn
-    %a.btn.btn-primary.btn-labeled.btn-block{:href => "pages-new-email.html"}
-      %i.btn-label.fa.fa-pencil-square-o>
-      New Email
-  .navigation
-    %ul.sections
-      %li.active
-        %a{:href => "#"}
-          %i.m-nav-icon.fa.fa-inbox>
-          Inbox
-          %span.label.pull-right 20
-      %li
-        %a{:href => "#"}
-          %i.m-nav-icon.fa.fa-star>
-          Starred
-          %span.label.pull-right 43
-      %li
-        %a{:href => "#"}
-          %i.m-nav-icon.fa.fa-envelope>
-          Sent mail
-      %li
-        %a{:href => "#"}
-          %i.m-nav-icon.fa.fa-exclamation>
-          Important
-      %li
-        %a{:href => "#"}
-          %i.m-nav-icon.fa.fa-file-text-o>
-          Drafts
-          %span.label.pull-right 11
-      %li
-        %a{:href => "#"}
-          %i.m-nav-icon.fa.fa-trash-o>
-          Trash
-      %li.divider
-      %li.add-more
-        %a{:href => "#"} + Add More
-    .mail-nav-header LABELS
-    %ul.sections
-      %li
-        %a{:href => "#"}/
-        = succeed "Client" do
-          .mail-nav-lbl.bg-success
-      %li
-        %a{:href => "#"}/
-        = succeed "Social" do
-          .mail-nav-lbl.bg-danger
-      %li
-        %a{:href => "#"}/
-        = succeed "Family" do
-          .mail-nav-lbl.bg-info
-      %li
-        %a{:href => "#"}/
-        = succeed "Friends" do
-          .mail-nav-lbl.bg-warning
-      %li
-        %a{:href => "#"}/
-        = succeed "Work" do
-          .mail-nav-lbl.bg-pa-purple
-      %li.divider
-      %li.add-more
-        %a{:href => "#"} + Add More
+
+- content_for :mailnav do
+  .mail-nav
+    .compose-btn
+      %a.btn.btn-primary.btn-labeled.btn-block{href: "/conversations/new"}
+        %i.btn-label.fa.fa-pencil-square-o>
+        New Conversation
+    .navigation
+      %ul.sections
+        - @conversations.each do |conversation|
+          %li.active
+            %a{href: conversation_path(conversation)}
+              %i.m-nav-icon.fa.fa-heart>
+              = conversation_title(conversation)
+              %span.label.pull-right
+                = unread_messages(conversation)
 
 = render template: "layouts/application"

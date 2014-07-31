@@ -1,0 +1,6 @@
+.mail-container
+  .mail-container-header
+    Talking with
+    = conversation_title(@conversation)
+  .mail-message-body
+    = render partial: "/chats/widget", locals: { chats: @conversation.chats.includes(:user).last(100), data: { conversation_id: @conversation.id } }

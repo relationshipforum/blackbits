@@ -36,10 +36,12 @@ var moment = window.moment || {};
     }
 
     function sendMessage() {
-        var input = $("#chat-input").val();
+        var conversationId = $("#chat").data("conversation-id"),
+            input = $("#chat-input").val(),
+            message = { conversation_id: conversationId, message: input };
 
         if (input) {
-            socket.send(input);
+            socket.send(JSON.stringify(message));
             $("#chat-input").val("");
         }
 

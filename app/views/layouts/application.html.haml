@@ -53,7 +53,8 @@
                     - if user_signed_in?
                       %li.nav-icon-btn.nav-icon-btn-success
                         %a{href: conversations_path}
-                          %span{class: "label"} 10
+                          %span{class: "label"}
+                            = total_unread_messages
                           %i.nav-icon.fa.fa-envelope
                       %li.dropdown
                         %a.dropdown-toggle.user-menu{"data-toggle" => "dropdown", :href => "#"}
@@ -84,9 +85,11 @@
             - flash.each do |type, msg|
               .col-sm-12
                 = content_tag :div, msg, class: "alert alert-#{type == "notice" ? "success" : "danger"}"
+
+          = yield(:mailnav) if content_for?(:mailnav)
           = content_for?(:content) ? yield(:content) : yield
 
-          - unless content_for?(:menu)
+          - unless content_for?(:menu) || content_for?(:mailnav)
             %footer.col-md-10.col-md-offset-1
               .row{style: "text-align: center"}
                 = link_to "About", "/about"
