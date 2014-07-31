@@ -21,13 +21,13 @@
                 = link_to submission, unread_submission_path(submission), title: submission.alt_text
             %br
             Started by
-            = link_to submission.posts.first.author, submission.posts.first.author
+            = link_to(submission.posts.first.author, submission.posts.first.author) rescue ""
           %td= link_to submission.forum, submission.forum
           %td= submission.posts_count - 1
           %td
-            = link_to submission.posts.last.author, submission.posts.last.author
+            = link_to(submission.posts.last.author, submission.posts.last.author) rescue ""
             %br
-            = l submission.posts.last.created_at
+            = l(submission.posts.last.created_at) rescue ""
 
 .row
   .pull-right{style: "margin-right: 12px"}
