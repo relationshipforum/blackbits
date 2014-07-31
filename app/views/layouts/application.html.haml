@@ -53,8 +53,9 @@
                     - if user_signed_in?
                       %li.nav-icon-btn.nav-icon-btn-success
                         %a{href: conversations_path}
-                          %span{class: "label"}
-                            = total_unread_messages
+                          - if total_unread_messages > 0
+                            %span{class: "label"}
+                              = total_unread_messages
                           %i.nav-icon.fa.fa-envelope
                       %li.dropdown
                         %a.dropdown-toggle.user-menu{"data-toggle" => "dropdown", :href => "#"}

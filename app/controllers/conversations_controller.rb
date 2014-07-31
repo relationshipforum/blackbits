@@ -4,6 +4,7 @@ class ConversationsController < ApplicationController
 
   def show
     @conversation = current_user.conversations.find(params[:id])
+    @conversation.read_by!(current_user)
   end
 
   def create

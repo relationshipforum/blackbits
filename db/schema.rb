@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140731201120) do
+ActiveRecord::Schema.define(version: 20140731211804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20140731201120) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "conversation_id"
+    t.datetime "deleted_at"
   end
 
   add_index "chats", ["conversation_id"], name: "index_chats_on_conversation_id", using: :btree
@@ -36,6 +37,7 @@ ActiveRecord::Schema.define(version: 20140731201120) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "deleted_at"
   end
 
   add_index "conversations", ["user_id"], name: "index_conversations_on_user_id", using: :btree
@@ -44,6 +46,7 @@ ActiveRecord::Schema.define(version: 20140731201120) do
     t.integer  "conversation_id"
     t.integer  "user_id"
     t.datetime "read_at"
+    t.datetime "deleted_at"
   end
 
   add_index "conversations_users", ["conversation_id", "user_id"], name: "index_conversations_users_on_conversation_id_and_user_id", unique: true, using: :btree

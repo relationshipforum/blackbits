@@ -36,12 +36,10 @@ var moment = window.moment || {};
     }
 
     function sendMessage() {
-        var conversationId = $("#chat").data("conversation-id"),
-            input = $("#chat-input").val(),
-            message = { conversation_id: conversationId, message: input };
+        var input = $("#chat-input").val();
 
         if (input) {
-            socket.send(JSON.stringify(message));
+            socket.send(input);
             $("#chat-input").val("");
         }
 
@@ -57,10 +55,13 @@ var moment = window.moment || {};
     });
 
     $(document).on("ready", function () {
-        var panel = $("#chat .panel-body");
+        var panel = $("#chat .panel-body"),
+            conversationId = $("#chat").data("conversation-id") || "global";
 
         if (panel && panel[0] && panel[0].scrollHeight) {
             panel.scrollTop(panel[0].scrollHeight);
+
+            url += "?conversation_id=" + conversationId;
 
             socket = new WebSocket(url);
             socket.onmessage = onMessage;

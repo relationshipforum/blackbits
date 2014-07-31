@@ -11,7 +11,8 @@ class User < ActiveRecord::Base
   has_many :thanks
   has_many :views, dependent: :destroy
 
-  has_and_belongs_to_many :conversations
+  has_many :conversations, through: :conversations_users
+  has_many :conversations_users
 
   before_validation :https_avatar_url
   validates :avatar_url, format: { with: /\Ahttps\:\/\/i\.imgur\.com\/(\w+)\.(png|jpe?g)\Z/, allow_nil: true, unless: Proc.new { |user| user.avatar_url == "pixel-admin/avatar.png" } }

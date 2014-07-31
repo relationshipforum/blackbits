@@ -7,7 +7,7 @@ class ChatsController < ApplicationController
 
     hijack do |tubesock|
       redis_thread = Thread.new do
-        Redis.new(url: REDIS_URL).subscribe "chat" do |on|
+        Redis.new(url: REDIS_URL).subscribe "chat.#{conversation_id}" do |on|
           on.message do |channel, message|
             if message.present?
               hash = JSON.parse(message)
@@ -21,9 +21,11 @@ class ChatsController < ApplicationController
 
       tubesock.onmessage do |m|
         if m.present?
-          Chat.create(user: current_user, message: m)
+          cid = conversation_id
 
-          Redis.new(url: REDIS_URL).publish "chat", JSON({
+          Chat.create(user: current_user, message: m, conversation_id: cid)
+
+          Redis.new(url: REDIS_URL).publish "chat.#{cid}", JSON({
             username: current_user.username,
             slug: current_user.slug,
             message: m.force_encoding("utf-8")
@@ -43,6 +45,17 @@ class ChatsController < ApplicationController
 
     if @chat.save
       render :show, status: :created, location: @chat
+    end
+  end
+
+  private
+  def conversation_id
+    cid = params.require(:conversation_id)
+
+    if cid == "global"
+      return cid
+    else
+      current_user.conversations.find(cid.to_s).id
     end
   end
 end

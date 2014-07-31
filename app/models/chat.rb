@@ -1,4 +1,8 @@
 class Chat < ActiveRecord::Base
+  acts_as_paranoid
+
+  after_create :update_conversation_read_at
+
   scope :global, ->{ where("conversation_id IS NULL") }
 
   belongs_to :user
@@ -8,5 +12,12 @@ class Chat < ActiveRecord::Base
 
   def to_s
     message
+  end
+
+  private
+  def update_conversation_read_at
+    if conversation.present?
+      conversation.read_by! user
+    end
   end
 end
