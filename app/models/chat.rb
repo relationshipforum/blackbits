@@ -17,6 +17,7 @@ class Chat < ActiveRecord::Base
   private
   def update_conversation_read_at
     if conversation.present?
+      conversation.update_column :updated_at, Time.now
       conversation.read_by! user
     end
   end

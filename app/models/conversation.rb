@@ -1,6 +1,8 @@
 class Conversation < ActiveRecord::Base
   acts_as_paranoid
 
+  default_scope { order("updated_at DESC") }
+
   has_many :users, through: :conversations_users
   has_many :conversations_users
   has_many :chats

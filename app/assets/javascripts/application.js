@@ -5,5 +5,6 @@
 //= require moment
 //= require threads
 //= require effects
+//= require conversations
 //= require chat
 
