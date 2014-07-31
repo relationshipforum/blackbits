@@ -9,6 +9,21 @@ module ApplicationHelper
     image_tag(user.avatar_url, class: "avatar", height: 40, width: 40)
   end
 
+  def meta_description
+    s = '<meta name="description" content="'
+    content = "The best relationship and love forum to get or give romantic advice."
+
+    if @submission.present?
+      content = @submission.posts.first.body
+    elsif @forum.present?
+      content = @forum.description
+    end
+
+    content = truncate(content, length: 155, separator: " ", omission: "")
+    s << content << '">'
+    s.html_safe
+  end
+
   def body_class
     kls = []
     kls << "theme-default"
