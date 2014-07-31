@@ -9,7 +9,7 @@
     .navigation
       %ul.sections
         - @conversations.each do |conversation|
-          %li.active
+          %li{class: @conversation == conversation ? "active" : ""}
             %a{href: conversation_path(conversation)}
               %i.m-nav-icon.fa.fa-heart>
               = conversation_title(conversation)
