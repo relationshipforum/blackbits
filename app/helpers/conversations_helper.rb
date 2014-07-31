@@ -7,7 +7,7 @@ module ConversationsHelper
   def unread_messages(conversation)
     read_at = conversation.conversations_users.where(user_id: current_user.id).first.read_at
 
-    @unread_count ||= if read_at.blank?
+    if read_at.blank?
       conversation.chats.count
     else
       conversation.chats.where("created_at > ?", read_at).count

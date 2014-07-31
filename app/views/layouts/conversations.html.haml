@@ -13,8 +13,8 @@
             %a{href: conversation_path(conversation)}
               %i.m-nav-icon.fa.fa-heart>
               = conversation_title(conversation)
-              - if unread_messages(conversation) > 0
+              - if (unread_count = unread_messages(conversation)) > 0
                 %span.label.pull-right
-                  = unread_messages(conversation)
+                  = unread_count
 
 = render template: "layouts/application"
