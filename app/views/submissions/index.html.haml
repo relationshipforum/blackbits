@@ -5,10 +5,11 @@
 .col-md-10.col-md-offset-1
   .row
     .pull-left
+      - last_chat = Chat.global.last
       Last Chat by
       %strong
-        = Chat.global.last.user
-      = "(#{time_ago_in_words Chat.last.created_at} ago)"
+        = last_chat.user
+      = "(#{time_ago_in_words last_chat.created_at} ago)"
 
     .pull-right
       - if user_signed_in?
