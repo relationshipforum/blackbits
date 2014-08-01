@@ -7,7 +7,7 @@
     .pull-left
       Last Chat by
       %strong
-        = Chat.last.user
+        = Chat.global.last.user
       = "(#{time_ago_in_words Chat.last.created_at} ago)"
 
     .pull-right
