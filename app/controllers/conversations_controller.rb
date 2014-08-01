@@ -18,7 +18,7 @@ class ConversationsController < ApplicationController
       conversation.conversations_users.create(user_id: user.id)
     end
 
-    head :ok
+    render json: conversation.id
   end
 
   private

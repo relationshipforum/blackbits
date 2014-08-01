@@ -15,8 +15,8 @@ var bootbox = bootbox || {};
                         type: "POST",
                         data: { recipients: result },
 
-                        success: function () {
-                            window.location.reload(true);
+                        success: function (data) {
+                            window.location = "/conversations/" + data;
                         }
                     });
                 }
