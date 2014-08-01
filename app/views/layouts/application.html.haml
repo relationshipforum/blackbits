@@ -90,21 +90,21 @@
           = yield(:mailnav) if content_for?(:mailnav)
           = content_for?(:content) ? yield(:content) : yield
 
-          - unless content_for?(:menu) || content_for?(:mailnav)
-            %footer.col-md-10.col-md-offset-1
-              .row{style: "text-align: center"}
-                = link_to "About", "/about"
-                &bull;
-                = link_to "Members", members_path
-                &bull;
-                = link_to "Google+", "https://plus.google.com/+RelationshipforumOrg1", rel: "publisher"
-                &bull;
-                = link_to "Twitter", "https://twitter.com/relations_forum"
-                &bull;
-                = link_to "GitHub", "https://github.com/relationshipforum/blackbits"
 
         #main-menu-bg
 
+        - unless content_for?(:menu) || content_for?(:mailnav)
+          %footer.col-md-10.col-md-offset-1
+            .row{style: "text-align: center"}
+              = link_to "About", "/about"
+              &bull;
+              = link_to "Members", members_path
+              &bull;
+              = link_to "Google+", "https://plus.google.com/+RelationshipforumOrg1", rel: "publisher"
+              &bull;
+              = link_to "Twitter", "https://twitter.com/relations_forum"
+              &bull;
+              = link_to "GitHub", "https://github.com/relationshipforum/blackbits"
 
     - if Rails.env == "production"
       :javascript
