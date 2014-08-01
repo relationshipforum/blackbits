@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
     role == "admin"
   end
 
+  def self.lookup(username)
+    User.where("lower(username) = ?", username.to_s.strip.downcase).first
+  end
+
   attr_accessor :login
 
   # Include default devise modules. Others available are:
