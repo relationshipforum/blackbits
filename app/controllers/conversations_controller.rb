@@ -12,13 +12,17 @@ class ConversationsController < ApplicationController
       User.lookup(recipient)
     end.compact
 
-    conversation = Conversation.create(user_id: current_user.id)
+    if recipients.present?
+      conversation = Conversation.create(user_id: current_user.id)
 
-    (recipients | [current_user]).each do |user|
-      conversation.conversations_users.create(user_id: user.id)
+      (recipients | [current_user]).each do |user|
+        conversation.conversations_users.create(user_id: user.id)
+      end
+
+      render json: conversation.id
+    else
+      head :ok
     end
-
-    render json: conversation.id
   end
 
   private
