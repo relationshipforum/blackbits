@@ -3,7 +3,7 @@ class ChatsController < ApplicationController
   before_filter :authenticate_user!
 
   def socket
-    REDIS.sadd("user_list", current_user.username)
+    REDIS.sadd("user_list.#{conversation_id}", current_user.username)
 
     hijack do |tubesock|
       redis_thread = Thread.new do
@@ -37,7 +37,7 @@ class ChatsController < ApplicationController
       end
       
       tubesock.onclose do
-        REDIS.srem("user_list", current_user.username)
+        REDIS.srem("user_list.#{conversation_id}", current_user.username)
         redis_thread.kill
       end
     end

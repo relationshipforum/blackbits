@@ -14,6 +14,10 @@ class Chat < ActiveRecord::Base
     message
   end
 
+  def self.user_list
+    REDIS.smembers("user_list.global")
+  end
+
   private
   def update_conversation_read_at
     if conversation.present?
