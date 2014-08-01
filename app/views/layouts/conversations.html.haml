@@ -6,7 +6,7 @@
       %button.btn.btn-primary.btn-labeled.btn-block#new-conversation
         %i.btn-label.fa.fa-pencil-square-o>
         New Conversation
-    .navigation
+    .navigation.open
       %ul.sections
         - @conversations.each do |conversation|
           %li{class: @conversation == conversation ? "active" : ""}
