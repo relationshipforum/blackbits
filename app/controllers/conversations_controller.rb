@@ -9,7 +9,7 @@ class ConversationsController < ApplicationController
 
   def create
     recipients = params.require(:recipients).to_s.split(",").map do |recipient|
-      User.find_by(username: recipient.to_s.strip) rescue nil
+      User.where("lower(username) = ?", recipient.to_s.strip.downcase).first rescue nil
     end
 
     conversation = Conversation.create(user_id: current_user.id)
