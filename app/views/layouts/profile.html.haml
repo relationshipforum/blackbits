@@ -7,7 +7,7 @@
             %span.text-semibold= current_user
           = avatar
           .btn-group
-            %a.btn.btn-xs.btn-primary.btn-outline.dark{:href => "#"}
+            %a.btn.btn-xs.btn-primary.btn-outline.dark{href: conversations_path}
               %i.fa.fa-envelope
             %a.btn.btn-xs.btn-danger.btn-outline.dark{href: destroy_user_session_path}
               %i.fa.fa-power-off
