@@ -19,6 +19,8 @@ class ConversationsController < ApplicationController
         conversation.conversations_users.create(user_id: user.id)
       end
 
+      recipients.each { |recipient| Mailer.new_conversation(recipient, conversation).deliver }
+
       render json: conversation.id
     else
       head :ok

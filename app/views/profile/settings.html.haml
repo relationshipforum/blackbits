@@ -28,5 +28,10 @@
             = f.check_box :whats_new_default, class: "px"
             %span.lbl
               What's New as Default Page
+        .checkbox
+          %label
+            = f.check_box :conversation_notification, class: "px"
+            %span.lbl
+              Email me on new conversation
       .panel-footer.text-right
         %button.btn.btn-primary Submit
