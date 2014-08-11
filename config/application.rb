@@ -27,5 +27,11 @@ module Blackbits
     config.generators.stylesheets = false
 
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| html_tag }
+
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      :address              => "localhost",
+      :port                 => 25
+    }
   end
 end

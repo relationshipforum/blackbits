@@ -1,5 +1,0 @@
-SENDGRID = {
-  username: "",
-  password: "",
-  domain: ""
-}
