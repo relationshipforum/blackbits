@@ -25,7 +25,8 @@ module PostsHelper
     if country.blank?
       ""
     else
-      image_tag("flags/#{country.to_s.downcase}.png", alt: country)
+      name = Carmen::Country.coded(country).name rescue ""
+      image_tag("flags/#{country.to_s.downcase}.png", alt: name, title: name)
     end
   end
 
