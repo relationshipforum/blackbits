@@ -20,7 +20,7 @@ class ConversationsController < ApplicationController
       end
 
       recipients.each do |recipient|
-        Mailer.new_conversation(recipient, conversation).deliver if recipient.conversation.notification?
+        Mailer.new_conversation(recipient, conversation).deliver if recipient.conversation_notification?
       end
 
       render json: conversation.id
