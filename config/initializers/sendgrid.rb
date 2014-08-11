@@ -1,0 +1,5 @@
+SENDGRID = {
+  username: "",
+  password: "",
+  domain: ""
+}
