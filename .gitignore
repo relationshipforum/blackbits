@@ -17,3 +17,4 @@
 
 PixelAdmin*
 .DS_Store
+config/initializers/sendgrid.rb
