@@ -20,10 +20,12 @@ module PostsHelper
   end
 
   def country_flag(country)
-    if !country
+    country = country.to_s.strip
+
+    if country.blank?
       ""
     else
-      image_tag("flags/#{country.to_s.downcase}.png")
+      image_tag("flags/#{country.to_s.downcase}.png", alt: country)
     end
   end
 
