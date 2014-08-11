@@ -19,7 +19,9 @@ class ConversationsController < ApplicationController
         conversation.conversations_users.create(user_id: user.id)
       end
 
-      recipients.each { |recipient| Mailer.new_conversation(recipient, conversation).deliver }
+      recipients.each do |recipient|
+        Mailer.new_conversation(recipient, conversation).deliver if recipient.conversation.notification?
+      end
 
       render json: conversation.id
     else
