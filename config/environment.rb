@@ -8,8 +8,8 @@ ActionMailer::Base.smtp_settings = {
   :address        => 'smtp.sendgrid.net',
   :port           => '587',
   :authentication => :plain,
-  :user_name      => SENDGRID[:username]
+  :user_name      => SENDGRID[:username],
   :password       => SENDGRID[:password],
-  :domain         => "relationshipforum.org",
+  :domain         => SENDGRID[:domain],
   :enable_starttls_auto => true
 }
