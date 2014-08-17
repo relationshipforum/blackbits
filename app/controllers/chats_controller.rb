@@ -44,14 +44,6 @@ class ChatsController < ApplicationController
     end
   end
 
-  def create
-    @chat = Chat.new(chat_params)
-
-    if @chat.save
-      render :show, status: :created, location: @chat
-    end
-  end
-
   private
   def conversation_id
     cid = params.require(:conversation_id)
