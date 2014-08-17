@@ -16,6 +16,10 @@
           .col-sm-8
             = f.country_select :country, { priority: %w(US CA EU), prompt: "Select a Country" }, { class: "form-control" }
         .row.form-group
+          = f.label :time_zone, class: "col-sm-4 control-label"
+          .col-sm-8
+            = f.time_zone_select :time_zone, nil, {}, class: "form-control"
+        .row.form-group
           = f.label :location, class: "col-sm-4 control-label"
           .col-sm-8
             = f.text_field :location, class: "form-control"
