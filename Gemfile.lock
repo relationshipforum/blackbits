@@ -158,6 +158,8 @@ GEM
       sass (~> 3.2.0)
       sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0)
+    sitemap_generator (5.0.5)
+      builder
     spring (1.1.3)
     sprockets (2.11.0)
       hike (~> 1.2)
@@ -185,7 +187,7 @@ GEM
     unicode_utils (1.4.0)
     warden (1.2.3)
       rack (>= 1.0)
-    websocket (1.1.4)
+    websocket (1.2.0)
 
 PLATFORMS
   ruby
@@ -213,6 +215,7 @@ DEPENDENCIES
   rinku
   rspec-rails
   sass-rails (~> 4.0.3)
+  sitemap_generator
   spring
   tubesock
   uglifier (>= 1.3.0)
