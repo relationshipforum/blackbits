@@ -42,6 +42,10 @@ class Post < ActiveRecord::Base
     Rails.cache.delete_matched("post-#{id}")
   end
 
+  def page
+    (submission.posts.index(self) / 10) + 1
+  end
+
   private
   def update_submission
     submission.update_attributes(updated_at: submission.posts.last.try(:created_at))

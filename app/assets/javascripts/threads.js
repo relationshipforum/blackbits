@@ -59,7 +59,7 @@
         });
 
         $(document).on("click", ".link-post", function () {
-            window.location.hash = "#post-" + $(this).data("post-id");
+            window.location = "/posts/" + $(this).data("post-id") + "/redirect";
             return false;
         });
 

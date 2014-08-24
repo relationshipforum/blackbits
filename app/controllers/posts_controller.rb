@@ -1,9 +1,10 @@
 class PostsController < ApplicationController
   before_action :set_submission, only: [:create]
   before_action :set_post, except: [:create, :thanks]
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index, :redirect]
 
-  def edit
+  def redirect
+    redirect_to submission_path(@post.submission, page: @post.page, anchor: "post-#{@post.id}")
   end
 
   def create
@@ -28,9 +29,7 @@ class PostsController < ApplicationController
     authorize! :edit, @post
 
     @post.update_attributes(post_params)
-    page = (@post.submission.posts.index(@post) / 10) + 1
-
-    redirect_to submission_path(@post.submission, page: page, anchor: "post-#{@post.id}")
+    redirect_to submission_path(@post.submission, page: @post.page, anchor: "post-#{@post.id}")
   end
 
   def destroy
