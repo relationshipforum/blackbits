@@ -37,6 +37,13 @@ class User < ActiveRecord::Base
     role == "admin"
   end
 
+  def unread_messages_count
+    ConversationsUser.joins("INNER JOIN (SELECT conversation_id, MAX(created_at) AS last_chat_at FROM chats GROUP BY conversation_id) AS chats ON chats.conversation_id = conversations_users.conversation_id").
+      where(user_id: id).
+      where("conversations_users.read_at IS NULL OR conversations_users.read_at < chats.last_chat_at").
+      count
+  end
+
   def self.lookup(username)
     User.where("lower(username) = ?", username.to_s.strip.downcase).first
   end

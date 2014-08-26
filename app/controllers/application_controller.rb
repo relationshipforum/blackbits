@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :set_time_zone_and_last_activity
   before_filter :check_force_chat
+  before_filter :check_for_pms
 
   protected
 
@@ -21,6 +22,12 @@ class ApplicationController < ActionController::Base
   def check_force_chat
     if user_signed_in? && current_user.force_chat?
       redirect_to chats_path, alert: "You are being forced to chat." unless controller_name == "chats"
+    end
+  end
+
+  def check_for_pms
+    if user_signed_in? && controller_name != "conversations" && current_user.unread_messages_count > 0
+      flash.now[:notice] = "You have unread messages! <a href='/conversations'>Click here</a> to view them.".html_safe
     end
   end
 end
