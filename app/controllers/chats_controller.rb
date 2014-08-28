@@ -44,6 +44,13 @@ class ChatsController < ApplicationController
     end
   end
 
+  def load
+    cid = conversation_id()
+    chats = (cid == "global") ? Chat.global : Chat.where(conversation_id: cid)
+
+    render partial: "/chats/widget", locals: { chats: chats.includes(:user).last(100) }
+  end
+
   private
   def conversation_id
     cid = params.require(:conversation_id)

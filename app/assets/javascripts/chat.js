@@ -31,8 +31,30 @@ var moment = window.moment || {};
         panel.scrollTop(panel[0].scrollHeight);
     }
 
-    function onClose() {
-        window.location.reload(true);
+    function reloadChat() {
+        var conversationId = $("#chat").data("conversation-id") || "global";
+
+        $.ajax({
+            type: "GET",
+            url: "/chats/load",
+            data: { conversation_id: conversationId },
+
+            success: function (data) {
+                var panel;
+
+                $("#chat").replaceWith(data);
+
+                panel = $("#chat .panel-body");
+
+                if (panel && panel[0] && panel[0].scrollHeight) {
+                    panel.scrollTop(panel[0].scrollHeight);
+                }
+            }
+        });
+    }
+
+    function onClose(e) {
+        reloadChat();
     }
 
     function sendMessage() {
@@ -63,7 +85,7 @@ var moment = window.moment || {};
 
             url += "?conversation_id=" + conversationId;
 
-            socket = new WebSocket(url);
+            socket = new ReconnectingWebSocket(url);
             socket.onmessage = onMessage;
             socket.onclose = onClose;
         }

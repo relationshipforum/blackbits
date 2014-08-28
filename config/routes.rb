@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :chats do
-    collection { get "socket" }
+    collection do
+      get "socket"
+      get "load"
+    end
   end
 
   resources :conversations
