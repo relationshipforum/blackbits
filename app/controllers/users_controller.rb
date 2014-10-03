@@ -21,6 +21,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.friendly.find(params[:id])
+    @user.increment!(:profile_views)
   end
 
   private

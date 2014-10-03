@@ -18,6 +18,9 @@
         %span.panel-title Statistics
       .list-group
         .list-group-item
+          %strong= @user.profile_views
+          Profile Views
+        .list-group-item
           %strong= @user.posts.count
           Posts
         .list-group-item
