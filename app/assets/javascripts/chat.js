@@ -1,9 +1,11 @@
-var moment = window.moment || {};
+var moment = window.moment || {},
+    ReconnectingWebSocket = ReconnectingWebSocket || {};
 
 (function () {
     "use strict";
 
     var url = "ws",
+        scrolledToBottom = true,
         socket;
 
     if (window.location.protocol.match("https")) {
@@ -46,8 +48,10 @@ var moment = window.moment || {};
 
                 panel = $("#chat .panel-body");
 
-                if (panel && panel[0] && panel[0].scrollHeight) {
-                    panel.scrollTop(panel[0].scrollHeight);
+                if (scrolledToBottom === true) {
+                    if (panel && panel[0] && panel[0].scrollHeight) {
+                        panel.scrollTop(panel[0].scrollHeight);
+                    }
                 }
             }
         });
@@ -88,6 +92,11 @@ var moment = window.moment || {};
             socket = new ReconnectingWebSocket(url);
             socket.onmessage = onMessage;
             socket.onclose = onClose;
+
+            panel.on("scroll", function () {
+                scrolledToBottom = $(this).scrollTop() +
+                    $(this).innerHeight() >= this.scrollHeight;
+            });
         }
     });
 }());
