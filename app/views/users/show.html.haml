@@ -8,9 +8,6 @@
     .profile-block
       .panel.profile-photo
         = image_tag @user.avatar_url
-      %br/
-      %a.btn{href: "#"}
-        %i.fa.fa-comment
     .panel.panel-transparent
       .panel-heading
         %span.panel-title Title
@@ -31,8 +28,25 @@
     .profile-content
       %ul#profile-tabs.nav.nav-tabs
         %li.active
-          %a{"data-toggle" => "tab", :href => "#profile-tabs-board"} Latest Posts
+          %a{"data-toggle" => "tab", :href => "#profile-tabs-favorite-posters"} Favorite Posters
+        %li
+          %a{"data-toggle" => "tab", :href => "#profile-tabs-top-posts"} Top Posts
       .tab-content.tab-content-bordered.panel-padding
-        #profile-tabs-board.widget-article-comments.tab-pane.panel.no-padding.no-border.fade.in.active
-          - @user.posts.last(20).each do |post|
-            = render post
+        #profile-tabs-favorite-posters.widget-followers.tab-pane.panel.no-padding.no-border.active
+          - @user.favorite_users.each do |user|
+            .follower
+              = image_tag(user.avatar, class: "follower-avatar")
+              .body
+                = link_to user, user, class: "follower-name"
+
+        #profile-tabs-top-posts.widget-article-comments.tab-pane.panel.no-padding.no-border
+          %table.table
+            %thead
+              %tr
+                %th Post
+                %th Thanks
+            %tbody
+              - @user.top_posts.each do |post|
+                %tr
+                  %td= link_to truncate_and_remove_quotes(post.body), submission_path(post.submission, page: post.page, anchor: "post-#{post.id}")
+                  %td= post.thanks_count

@@ -37,6 +37,18 @@ class User < ActiveRecord::Base
     role == "admin"
   end
 
+  def top_posts
+    Post.unscoped.
+      where(author: self).
+      where("deleted_at IS NULL").
+      order("thanks_count DESC").
+      limit(10)
+  end
+
+  def favorite_users
+    []
+  end
+
   def unread_messages_count
     ConversationsUser.joins("INNER JOIN (SELECT conversation_id, MAX(created_at) AS last_chat_at FROM chats GROUP BY conversation_id) AS chats ON chats.conversation_id = conversations_users.conversation_id").
       where(user_id: id).

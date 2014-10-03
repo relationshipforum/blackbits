@@ -20,9 +20,8 @@ class SubmissionsController < ApplicationController
 
   def unread
     post = @submission.first_unread_post(current_user)
-    page = (@submission.posts.index(post) / 10) + 1
 
-    redirect_to submission_path(@submission, page: page, anchor: "post-#{post.id}")
+    redirect_to submission_path(@submission, page: post.page, anchor: "post-#{post.id}")
   end
 
   def edit

@@ -2,7 +2,7 @@ class Thank < ActiveRecord::Base
   acts_as_paranoid
 
   belongs_to :user
-  belongs_to :post
+  belongs_to :post, counter_cache: true
 
   after_save :clear_post_cache
   after_destroy :clear_post_cache
