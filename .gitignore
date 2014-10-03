@@ -17,3 +17,6 @@
 
 PixelAdmin*
 .DS_Store
+
+bin/pull
+bin/restart
