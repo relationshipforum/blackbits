@@ -1,7 +1,7 @@
 ruby "2.1.2"
 source "https://rubygems.org"
 
-gem "rails", "4.1.4"
+gem "rails", "4.1.6"
 gem "pg"
 gem "devise"
 gem "haml-rails"
