@@ -41,6 +41,7 @@ class User < ActiveRecord::Base
     Post.unscoped.
       where(author: self).
       where("deleted_at IS NULL").
+      where("thanks_count IS NOT NULL AND thanks_count > 0").
       order("thanks_count DESC").
       limit(10)
   end
