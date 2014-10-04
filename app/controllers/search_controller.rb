@@ -1,7 +1,7 @@
 class SearchController < ApplicationController
   def index
     if search_params.present?
-      @query = search_params
+      @query = search_params[:query]
       @results = Post.search_by_body(@query)
       @page = params[:page].to_i || 1
       @posts = @results.page(@page)
@@ -10,6 +10,6 @@ class SearchController < ApplicationController
 
   private
   def search_params
-    params.require(:query)
+    params.permit(:query)
   end
 end
