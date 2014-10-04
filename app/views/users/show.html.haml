@@ -56,7 +56,7 @@
                 %th User
                 %th= "Times Thanked by #{@user}"
             %tbody
-              - @user.favorite_users.each do |favorite|
+              - @user.most_thanks(:favorite_users).each do |favorite|
                 %tr
                   %td
                     = image_tag(favorite[0].avatar_url, class: "avatar", height: 40, width: 40)
@@ -71,7 +71,7 @@
                 %th User
                 %th= "Thanks Given to #{@user}"
             %tbody
-              - @user.loved_by.each do |lover|
+              - @user.most_thanks(:loved_by).each do |lover|
                 %tr
                   %td
                     = image_tag(lover[0].avatar_url, class: "avatar", height: 40, width: 40)

@@ -45,21 +45,37 @@ class User < ActiveRecord::Base
       limit(10)
   end
 
-  def favorite_users
-    []
-  end
+  # This method returns data for the "Loved By" and "Favorite Posters" tables
+  # in the user profile.
+  def most_thanks(mine)
+    mine = (mine == :loved_by)
 
-  def loved_by
-    sql = "SELECT  user_id,
-              COUNT(user_id) AS thanks_count
-      FROM    thanks
-      WHERE thanks.post_id IN
-          (SELECT id FROM posts WHERE posts.author_id = #{id})
-          AND
-          thanks.deleted_at IS NULL
-      GROUP BY user_id
-      ORDER BY thanks_count DESC
-      LIMIT 10"
+    if mine
+      sql = <<EOS
+        SELECT  user_id,
+                COUNT(user_id) AS thanks_count
+        FROM    thanks
+        WHERE   thanks.post_id IN
+                  (SELECT id FROM posts WHERE posts.author_id = #{id})
+                  AND
+                  thanks.deleted_at IS NULL
+        GROUP BY user_id
+        ORDER BY thanks_count DESC
+        LIMIT 10
+EOS
+    else
+      sql = <<EOS
+        SELECT      posts.author_id AS user_id,
+                    COUNT(posts.author_id) AS thanks_count
+        FROM        thanks
+        INNER JOIN  posts
+        ON          posts.id = thanks.post_id
+        WHERE       user_id = #{id}
+        GROUP BY    posts.author_id
+        ORDER BY    thanks_count DESC
+        LIMIT 10
+EOS
+    end
 
     chart = ActiveRecord::Base.connection.execute(sql).to_a
     
@@ -69,9 +85,18 @@ class User < ActiveRecord::Base
   end
 
   def unread_messages_count
-    join = "INNER JOIN
-      (SELECT conversation_id, MAX(created_at) AS last_chat_at FROM chats GROUP BY conversation_id)
-      AS chats ON chats.conversation_id = conversations_users.conversation_id"
+    join = <<EOS
+    INNER JOIN
+      (
+        SELECT    conversation_id,
+                  MAX(created_at)
+        AS        last_chat_at
+        FROM      chats
+        GROUP BY  conversation_id
+      )
+    AS chats
+    ON chats.conversation_id = conversations_users.conversation_id
+EOS
 
     ConversationsUser.joins(join).
       where(user_id: id).
