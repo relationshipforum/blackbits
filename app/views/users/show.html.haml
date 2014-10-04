@@ -33,14 +33,39 @@
         %li.active
           %a{"data-toggle" => "tab", :href => "#profile-tabs-favorite-posters"} Favorite Posters
         %li
+          %a{"data-toggle" => "tab", :href => "#profile-tabs-loved-by"} Loved By
+        %li
           %a{"data-toggle" => "tab", :href => "#profile-tabs-top-posts"} Top Posts
       .tab-content.tab-content-bordered.panel-padding
         #profile-tabs-favorite-posters.widget-followers.tab-pane.panel.no-padding.no-border.active
-          - @user.favorite_users.each do |user|
-            .follower
-              = image_tag(user.avatar, class: "follower-avatar")
-              .body
-                = link_to user, user, class: "follower-name"
+          %table.table
+            %thead
+              %tr
+                %th User
+                %th= "Times Thanked by #{@user}"
+            %tbody
+              - @user.favorite_users.each do |favorite|
+                %tr
+                  %td
+                    = image_tag(favorite[0].avatar_url, class: "avatar", height: 40, width: 40)
+                    = link_to favorite[0], favorite[0]
+                  %td
+                    = favorite[1]
+
+        #profile-tabs-loved-by.widget-followers.tab-pane.panel.no-padding.no-border
+          %table.table
+            %thead
+              %tr
+                %th User
+                %th= "Thanks Given to #{@user}"
+            %tbody
+              - @user.loved_by.each do |lover|
+                %tr
+                  %td
+                    = image_tag(lover[0].avatar_url, class: "avatar", height: 40, width: 40)
+                    = link_to lover[0], lover[0]
+                  %td
+                    = lover[1]
 
         #profile-tabs-top-posts.widget-article-comments.tab-pane.panel.no-padding.no-border
           %table.table

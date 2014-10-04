@@ -49,6 +49,25 @@ class User < ActiveRecord::Base
     []
   end
 
+  def loved_by
+    sql = "SELECT  user_id,
+              COUNT(user_id) AS thanks_count
+      FROM    thanks
+      WHERE thanks.post_id IN
+          (SELECT id FROM posts WHERE posts.author_id = #{id})
+          AND
+          thanks.deleted_at IS NULL
+      GROUP BY user_id
+      ORDER BY thanks_count DESC
+      LIMIT 10"
+
+    chart = ActiveRecord::Base.connection.execute(sql).to_a
+    
+    User.where("id IN (?)", chart.map { |res| res["user_id"] }).map do |user|
+      [user, chart.find { |res| res["user_id"].to_i == user.id }["thanks_count"].to_i ]
+    end.sort_by { |lover| lover[1] }.reverse
+  end
+
   def unread_messages_count
     ConversationsUser.joins("INNER JOIN (SELECT conversation_id, MAX(created_at) AS last_chat_at FROM chats GROUP BY conversation_id) AS chats ON chats.conversation_id = conversations_users.conversation_id").
       where(user_id: id).
