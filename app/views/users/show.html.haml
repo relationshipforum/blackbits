@@ -31,13 +31,25 @@
     .profile-content
       %ul#profile-tabs.nav.nav-tabs
         %li.active
+          %a{"data-toggle" => "tab", :href => "#profile-tabs-top-posts"} Top Posts
+        %li
           %a{"data-toggle" => "tab", :href => "#profile-tabs-favorite-posters"} Favorite Posters
         %li
           %a{"data-toggle" => "tab", :href => "#profile-tabs-loved-by"} Loved By
-        %li
-          %a{"data-toggle" => "tab", :href => "#profile-tabs-top-posts"} Top Posts
       .tab-content.tab-content-bordered.panel-padding
-        #profile-tabs-favorite-posters.widget-followers.tab-pane.panel.no-padding.no-border.active
+        #profile-tabs-top-posts.widget-article-comments.tab-pane.panel.no-padding.no-border.active
+          %table.table
+            %thead
+              %tr
+                %th Post
+                %th Thanks
+            %tbody
+              - @user.top_posts.each do |post|
+                %tr
+                  %td= link_to truncate_and_remove_quotes(post.body), submission_path(post.submission, page: post.page, anchor: "post-#{post.id}")
+                  %td= post.thanks_count
+
+        #profile-tabs-favorite-posters.widget-followers.tab-pane.panel.no-padding.no-border
           %table.table
             %thead
               %tr
@@ -66,15 +78,3 @@
                     = link_to lover[0], lover[0]
                   %td
                     = lover[1]
-
-        #profile-tabs-top-posts.widget-article-comments.tab-pane.panel.no-padding.no-border
-          %table.table
-            %thead
-              %tr
-                %th Post
-                %th Thanks
-            %tbody
-              - @user.top_posts.each do |post|
-                %tr
-                  %td= link_to truncate_and_remove_quotes(post.body), submission_path(post.submission, page: post.page, anchor: "post-#{post.id}")
-                  %td= post.thanks_count

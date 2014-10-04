@@ -69,7 +69,11 @@ class User < ActiveRecord::Base
   end
 
   def unread_messages_count
-    ConversationsUser.joins("INNER JOIN (SELECT conversation_id, MAX(created_at) AS last_chat_at FROM chats GROUP BY conversation_id) AS chats ON chats.conversation_id = conversations_users.conversation_id").
+    join = "INNER JOIN
+      (SELECT conversation_id, MAX(created_at) AS last_chat_at FROM chats GROUP BY conversation_id)
+      AS chats ON chats.conversation_id = conversations_users.conversation_id"
+
+    ConversationsUser.joins(join).
       where(user_id: id).
       where("conversations_users.read_at IS NULL OR conversations_users.read_at < chats.last_chat_at").
       count
