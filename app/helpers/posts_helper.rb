@@ -49,4 +49,9 @@ module PostsHelper
 
     "#{stats[0]} times, #{stats[1]} posts"
   end
+
+  def truncate_and_remove_quotes(body, length = 250)
+    body = body.to_s.gsub(/\>(.*)/, "")
+    truncate body, length: length
+  end
 end

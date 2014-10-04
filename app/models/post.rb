@@ -1,6 +1,9 @@
 class Post < ActiveRecord::Base
+  include PgSearch
+
   paginates_per 10
   acts_as_paranoid
+  pg_search_scope :search_by_body, against: :body
 
   default_scope { order("created_at ASC") }
 

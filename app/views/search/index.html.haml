@@ -1,0 +1,39 @@
+.page-header
+  %h1
+    Search
+
+- if @query
+  .search-text
+    %strong
+      = @results.size
+    results found for:
+    %span.text-primary
+      = @query
+
+.panel.search-panel
+  = form_tag nil, class: "search-form bg-primary" do
+    .input-group.input-group-lg
+      %span.input-group-addon.no-background
+        %i.fa.fa-search
+      = text_field_tag "query", @query, class: "form-control", placeholder: "Type your search here..."
+      %span.input-group-btn
+        %button.btn Search
+
+  - if @results
+    .panel-body
+      %ul.search-classic
+        - @posts.each do |post|
+          %li
+            = link_to "Thread: #{post.submission}", submission_path(post.submission, page: post.page, anchor: "post-#{post.id}"), class: "search-title"
+            %span.search-url
+              Posted by
+              = post.author
+              at
+              = l post.created_at
+
+            .search-content
+              = truncate_and_remove_quotes(post.body, 500)
+
+    .panel-footer
+      %ul.pagination
+        = paginate(@posts)

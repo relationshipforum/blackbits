@@ -29,6 +29,7 @@ module ApplicationHelper
     kls << "theme-default"
     kls << "no-main-menu" unless content_for?(:menu)
     kls << "page-mail" if controller_name == "messages"
+    kls << "page-search" if controller_name == "search"
     kls << content_for(:body_class) if content_for?(:body_class)
 
     kls.join(" ")

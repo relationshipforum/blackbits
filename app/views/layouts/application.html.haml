@@ -53,6 +53,9 @@
                 .right.clearfix
                   %ul.nav.navbar-nav.pull-right.right-navbar-nav
                     - if user_signed_in?
+                      %li.nav-icon-btn
+                        %a{href: search_path}
+                          %i.nav-icon.fa.fa-search
                       %li.nav-icon-btn.nav-icon-btn-success
                         %a{href: conversations_path}
                           - if total_unread_messages > 0

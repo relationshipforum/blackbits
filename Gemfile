@@ -3,6 +3,7 @@ source "https://rubygems.org"
 
 gem "rails", "4.1.6"
 gem "pg"
+gem "pg_search"
 gem "devise"
 gem "haml-rails"
 gem "rspec-rails"

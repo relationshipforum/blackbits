@@ -45,4 +45,7 @@ Rails.application.routes.draw do
   get "profile/signature" => "profile#signature"
 
   get "forums/:forum_id" => "submissions#index", as: :forum
+
+  get "search" => "search#index"
+  post "search" => "search#index"
 end
