@@ -46,6 +46,16 @@ class User < ActiveRecord::Base
       limit(10)
   end
 
+  def spammer!
+    submissions.all.each do |s|
+      s.posts.each(&:really_destroy!)
+      s = Submission.find(s.id)
+      s.really_destroy!
+    end
+
+    really_destroy!
+  end
+
   # This method returns data for the "Loved By" and "Favorite Posters" tables
   # in the user profile.
   def most_thanks(mine)
