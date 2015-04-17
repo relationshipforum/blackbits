@@ -11,7 +11,7 @@ class ChatsController < ApplicationController
           on.message do |channel, message|
             if message.present?
               hash = JSON.parse(message)
-              hash["message"] = Rinku.auto_link(hash["message"], :all, 'target="_blank"')
+              hash["message"] = view_context.sanitize_message(hash["message"])
               hash[:timestamp] = Time.now.iso8601
               Conversation.find(conversation_id).read_by!(current_user) unless conversation_id == "global"
               tubesock.send_data(JSON(hash))
