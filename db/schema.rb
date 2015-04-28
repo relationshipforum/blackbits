@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141003014226) do
+ActiveRecord::Schema.define(version: 20150428232314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 20141003014226) do
     t.string   "slug"
     t.integer  "posts_count", default: 0
     t.datetime "deleted_at"
+    t.boolean  "secret"
   end
 
   add_index "submissions", ["deleted_at"], name: "index_submissions_on_deleted_at", using: :btree

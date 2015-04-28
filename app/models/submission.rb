@@ -4,6 +4,8 @@ class Submission < ActiveRecord::Base
 
   acts_as_paranoid
 
+  scope :not_secret, -> { where("secret IS NOT true") }
+
   belongs_to :forum
   belongs_to :author, class_name: "User"
   has_many :posts, -> { order "created_at ASC" }, dependent: :destroy

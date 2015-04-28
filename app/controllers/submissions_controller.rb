@@ -7,9 +7,14 @@ class SubmissionsController < ApplicationController
   def index
     @submissions = Submission.includes(posts: [:author]).includes(:forum).order("updated_at DESC")
     @submissions = @submissions.where(forum_id: @forum.id) if @forum
-    @submissions = @submissions.page(@page)
 
-    @views = current_user.views.where("submission_id IN (?)", @submissions.map(&:id)) if user_signed_in?
+    if user_signed_in?
+      @views = current_user.views.where("submission_id IN (?)", @submissions.map(&:id))
+    else
+      @submissions = @submissions.not_secret
+    end
+
+    @submissions = @submissions.page(@page)
     @posted_submission_ids = Post.select("submission_id").where(author_id: current_user.id).where("submission_id IN (?)", @submissions.map(&:id)).map(&:submission_id) if user_signed_in?
   end
 
@@ -58,6 +63,10 @@ class SubmissionsController < ApplicationController
   private
   def set_submission
     @submission = Submission.friendly.find(params[:id])
+
+    if !user_signed_in? && @submission.secret?
+      redirect_to root_path
+    end
   end
 
   def submission_params
