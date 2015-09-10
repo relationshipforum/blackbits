@@ -48,12 +48,12 @@ class User < ActiveRecord::Base
 
   def spammer!
     submissions.all.each do |s|
-      s.posts.each(&:really_destroy!)
-      s = Submission.find(s.id)
-      s.really_destroy!
+      s.posts.destroy
+      s = Submission.unscoped.find(s.id)
+      s.destroy
     end
 
-    really_destroy!
+    self.destroy
   end
 
   # This method returns data for the "Loved By" and "Favorite Posters" tables

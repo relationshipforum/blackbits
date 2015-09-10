@@ -9,14 +9,14 @@
 
     .panel-heading-controls
       - if user_signed_in?
-        - if current_user == author
+        - if current_user.admin? || current_user == author
           %a.btn.btn-xs.btn-info.btn-outline{href: edit_post_path(post)}
             %span.fa.fa-pencil
             Edit Post
           %button.btn.btn-xs.btn-danger.btn-outline.delete-post
             %span.fa.fa-trash-o
             Delete Post
-        - else
+        - if current_user != author
           %button.btn.btn-xs.btn-info.btn-outline.quote-post
             %span.fa.fa-quote-right
             Quote

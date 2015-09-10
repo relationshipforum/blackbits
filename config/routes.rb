@@ -37,7 +37,12 @@ Rails.application.routes.draw do
   get "about" => "pages#about"
   get "rules" => "pages#rules"
   get "members" => "users#index", as: :members
-  resources :users
+
+  resources :users do
+    member do
+      delete "spammer"
+    end
+  end
 
   get "profile" => "profile#edit"
   get "profile/avatar" => "profile#avatar"

@@ -26,6 +26,13 @@
         .list-group-item
           %strong= Thank.thank_stats_for(@user)[0]
           Thanks
+    - if current_user.admin?
+      .panel.panel-transparent
+        .panel-heading
+          %span.panel-title Admin
+        .list-group
+          .list-group-item
+            = link_to "Spammer!", spammer_user_path(@user), method: :delete, confirm: "Are you sure you want to delete this user and all its posts?"
   .right-col
     %hr.profile-content-hr.no-grid-gutter-h/
     .profile-content

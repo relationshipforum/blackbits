@@ -3,6 +3,13 @@ class UsersController < ApplicationController
     @users = User.order("created_at ASC")
   end
 
+  def spammer
+    @user = User.friendly.find(params[:id])
+    @user.spammer!
+
+    redirect_to root_path, notice: "User deleted."
+  end
+
   def update
     if current_user.update_attributes(update_user_params)
       redirect_to :back, notice: "Updated successfully!"
